@@ -3,6 +3,7 @@
     package="org.wit.livedive">
 
     <application
+        android:name="org.wit.livedive.main.MainApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,6 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LiveDive">
         <activity android:name="org.wit.livedive.activities.DiveActivity">
+        </activity>
+        <activity android:name=".activities.DiveListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
