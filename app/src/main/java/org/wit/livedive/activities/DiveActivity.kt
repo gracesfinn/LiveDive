@@ -13,6 +13,7 @@ import org.jetbrains.anko.info
 class DiveActivity : AppCompatActivity() , AnkoLogger {
 
     var dive = DiveModel()
+    val dives = ArrayList<DiveModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,8 +23,14 @@ class DiveActivity : AppCompatActivity() , AnkoLogger {
     btnAdd.setOnClickListener()
     {
         dive.title = diveTitle.text.toString()
+        dive.description = description.text.toString()
         if (dive.title.isNotEmpty()) {
+            dives.add(dive)
             info("add Button Pressed: $dive")
+            for (i in dives.indices) {
+
+                info("Dive [$i]:${this.dives[i]}")
+            }
         } else {
             toast("Please Enter a title")
         }
