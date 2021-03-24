@@ -8,16 +8,18 @@ import org.wit.livedive.R
 import org.wit.livedive.models.DiveModel
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.wit.livedive.main.MainApp
 
 
 class DiveActivity : AppCompatActivity() , AnkoLogger {
 
     var dive = DiveModel()
-    val dives = ArrayList<DiveModel>()
+    lateinit var app : MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dive)
+        app = application as MainApp
         info("Dive Activity started..")
 
     btnAdd.setOnClickListener()
@@ -25,11 +27,11 @@ class DiveActivity : AppCompatActivity() , AnkoLogger {
         dive.title = diveTitle.text.toString()
         dive.description = description.text.toString()
         if (dive.title.isNotEmpty()) {
-            dives.add(dive)
-            info("add Button Pressed: $dive")
-            for (i in dives.indices) {
+            app!!.dives.add(dive)
+            info("add Button Pressed: ${dive}")
+            for (i in app!!.dives.indices) {
 
-                info("Dive [$i]:${this.dives[i]}")
+                info("Dive [$i]:${app!!.dives[i]}")
             }
         } else {
             toast("Please Enter a title")

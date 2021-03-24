@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LiveDive">
-        <activity android:name=".activities.DiveActivity">
+        <activity android:name="org.wit.livedive.activities.DiveActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
