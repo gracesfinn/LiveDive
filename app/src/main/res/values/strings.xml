@@ -4,4 +4,7 @@
     <string name="hint_diveDescription">Description</string>
     <string name="button_addDive">Add Dive</string>
     <string name="menu_addDive">Add</string>
+    <string name="menu_cancelDive">Cancel</string>
+    <string name="enter_dive_title"> Please enter a Dive Title </string>
+    <string name="save_dive"> Save Dive </string>
 </resources>

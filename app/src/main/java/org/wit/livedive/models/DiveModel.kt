@@ -1,4 +1,11 @@
 package org.wit.livedive.models
 
-class DiveModel (var title: String = "",
-                 var description: String = "")
+
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+class DiveModel (
+    var id: Long = 0,
+    var title: String = "",
+    var description: String = ""): Parcelable
