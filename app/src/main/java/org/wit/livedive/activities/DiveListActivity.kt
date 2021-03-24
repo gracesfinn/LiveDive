@@ -1,9 +1,7 @@
 package org.wit.livedive.activities
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_dive.view.*
 import kotlinx.android.synthetic.main.activity_divelist.*
 import kotlinx.android.synthetic.main.card_dive.view.*
+import org.jetbrains.anko.startActivityForResult
 import org.wit.livedive.R
 import org.wit.livedive.main.MainApp
 import org.wit.livedive.models.DiveModel
@@ -25,9 +24,22 @@ class DiveListActivity: AppCompatActivity() {
         setContentView(R.layout.activity_divelist)
         app = application as MainApp
 
+        toolbar.title = title
+        setSupportActionBar(toolbar)
+
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = DiveAdapter(app.dives)
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.item_add -> startActivityForResult<DiveActivity>(0)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     class DiveAdapter constructor(private var dives: List<DiveModel>) :

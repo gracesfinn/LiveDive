@@ -33,6 +33,8 @@ class DiveActivity : AppCompatActivity() , AnkoLogger {
 
                 info("Dive [$i]:${app!!.dives[i]}")
             }
+            setResult(AppCompatActivity.RESULT_OK)
+            finish()
         } else {
             toast("Please Enter a title")
         }

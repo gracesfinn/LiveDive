@@ -12,7 +12,6 @@ class MainApp: Application(), AnkoLogger {
     override fun onCreate() {
         super.onCreate()
         info("LiveDive started")
-        dives.add(DiveModel("One", "About One"))
-        dives.add(DiveModel("Two", "About Two"))
+
     }
 }
