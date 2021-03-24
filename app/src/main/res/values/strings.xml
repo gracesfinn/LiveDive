@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">LiveDive</string>
+    <string name="hint_diveTitle">Dive Title</string>
+    <string name="button_addPlacemark">Add Dive</string>
 </resources>
