@@ -44,4 +44,6 @@ class DiveAdapter constructor(
         }
 
     }
+
 }
+
