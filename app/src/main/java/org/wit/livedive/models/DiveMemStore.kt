@@ -28,6 +28,7 @@ class DiveMemStore : DiveStore, AnkoLogger {
         if (foundDive != null) {
             foundDive.title = dive.title
             foundDive.description = dive.description
+            foundDive.image = dive.image
             logAll()
         }
     }

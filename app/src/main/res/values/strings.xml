@@ -9,5 +9,6 @@
     <string name="save_dive"> Save Dive </string>
 
     <string name="button_addImage"> Add Image </string>
-    <string name="select_dive_image">Select placemark image</string>
+    <string name="select_dive_image">Select Dive Image</string>
+    <string name="change_dive_image">Change Dive Image</string>
 </resources>

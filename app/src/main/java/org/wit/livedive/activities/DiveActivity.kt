@@ -40,6 +40,9 @@ class DiveActivity : AppCompatActivity() , AnkoLogger {
             diveTitle.setText(dive.title)
             description.setText(dive.description)
             diveImage.setImageBitmap(readImageFromPath(this, dive.image))
+            if (dive.image != null) {
+                chooseImage.setText(R.string.change_dive_image)
+            }
             btnAdd.setText(R.string.save_dive)
         }
 
@@ -88,6 +91,7 @@ class DiveActivity : AppCompatActivity() , AnkoLogger {
                 if (data != null) {
                     dive.image = data.getData().toString()
                     diveImage.setImageBitmap(readImage(this, resultCode, data))
+                    chooseImage.setText(R.string.change_dive_image)
                 }
             }
         }

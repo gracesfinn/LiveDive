@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.card_dive.view.*
 import org.wit.livedive.R
+import org.wit.livedive.helpers.readImageFromPath
 import org.wit.livedive.models.DiveModel
 
 
@@ -40,6 +41,7 @@ class DiveAdapter constructor(
         fun bind(dive: DiveModel, listener: DiveListener) {
             itemView.diveTitleCard.text = dive.title
             itemView.descriptionCard.text = dive.description
+            itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, dive.image))
             itemView.setOnClickListener{ listener.onDiveClick(dive)}
         }
 
