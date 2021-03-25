@@ -2,16 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.wit.livedive">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
-        android:name="org.wit.livedive.main.MainApp"
+        android:name=".main.MainApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LiveDive">
-        <activity android:name="org.wit.livedive.activities.DiveActivity">
-        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".MapActivity"
+            android:label="@string/title_activity_map"></activity>
+        <activity android:name=".activities.DiveActivity"></activity>
         <activity android:name=".activities.DiveListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

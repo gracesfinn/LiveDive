@@ -11,10 +11,13 @@ import org.wit.livedive.R
 import org.wit.livedive.models.DiveModel
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.intentFor
+import org.wit.livedive.MapActivity
 import org.wit.livedive.helpers.readImage
 import org.wit.livedive.helpers.readImageFromPath
 import org.wit.livedive.helpers.showImagePicker
 import org.wit.livedive.main.MainApp
+import org.wit.livedive.models.Location
 
 
 class DiveActivity : AppCompatActivity() , AnkoLogger {
@@ -22,6 +25,8 @@ class DiveActivity : AppCompatActivity() , AnkoLogger {
     var dive = DiveModel()
     lateinit var app: MainApp
     val IMAGE_REQUEST = 1
+    val LOCATION_REQUEST = 2
+    //var location = Location(19.2869, -81.3674, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +72,16 @@ class DiveActivity : AppCompatActivity() , AnkoLogger {
             showImagePicker(this, IMAGE_REQUEST)
 
         }
+
+        diveLocation.setOnClickListener {
+            val location = Location(19.2869, -81.3674, 15f)
+            if (dive.zoom != 0f) {
+                location.lat =  dive.lat
+                location.lng = dive.lng
+                location.zoom = dive.zoom
+            }
+            startActivityForResult (intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
+        }
     }
 
 
@@ -92,6 +107,14 @@ class DiveActivity : AppCompatActivity() , AnkoLogger {
                     dive.image = data.getData().toString()
                     diveImage.setImageBitmap(readImage(this, resultCode, data))
                     chooseImage.setText(R.string.change_dive_image)
+                }
+            }
+            LOCATION_REQUEST -> {
+                if (data != null) {
+                    val location = data.extras?.getParcelable<Location>("location")!!
+                    dive.lat = location.lat
+                    dive.lng = location.lng
+                    dive.zoom = location.zoom
                 }
             }
         }

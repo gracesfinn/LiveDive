@@ -29,6 +29,9 @@ class DiveMemStore : DiveStore, AnkoLogger {
             foundDive.title = dive.title
             foundDive.description = dive.description
             foundDive.image = dive.image
+            foundDive.lat = dive.lat
+            foundDive.lng = dive.lng
+            foundDive.zoom = dive.zoom
             logAll()
         }
     }
