@@ -22,6 +22,8 @@
             android:label="@string/title_activity_map"></activity>
         <activity android:name=".activities.DiveActivity"></activity>
         <activity android:name=".activities.DiveListActivity">
+        </activity>
+        <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
