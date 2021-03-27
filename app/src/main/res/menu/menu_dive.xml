@@ -3,6 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/item_save"
+        android:title="@string/menu_saveDive"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/item_delete"
         android:title="@string/menu_deleteDive"
         app:showAsAction="always"/>
@@ -10,4 +14,6 @@
         android:id="@+id/item_cancel"
         android:title="@string/menu_cancelDive"
         app:showAsAction="always"/>
+
+
 </menu>

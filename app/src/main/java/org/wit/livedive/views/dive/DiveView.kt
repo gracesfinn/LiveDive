@@ -1,18 +1,18 @@
-package org.wit.livedive.activities
+package org.wit.livedive.views.dive
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_dive.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
+import org.wit.livedive.BaseView
 import org.wit.livedive.R
 import org.wit.livedive.helpers.readImageFromPath
 import org.wit.livedive.models.DiveModel
 
-class DiveView : AppCompatActivity(), AnkoLogger {
+class DiveView : BaseView(), AnkoLogger {
 
     lateinit var presenter: DivePresenter
     var dive = DiveModel()
@@ -20,32 +20,24 @@ class DiveView : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dive)
-        toolbarAdd.title = title
-        setSupportActionBar(toolbarAdd)
 
-        presenter = DivePresenter(this)
+        init(toolbarAdd)
 
-        btnAdd.setOnClickListener {
-            if (diveTitle.text.toString().isEmpty()) {
-                toast(R.string.enter_dive_title)
-            } else {
-                presenter.doAddOrSave(diveTitle.text.toString(), description.text.toString())
-            }
-        }
+        presenter = initPresenter(DivePresenter(this)) as DivePresenter
 
         chooseImage.setOnClickListener { presenter.doSelectImage() }
+
 
         diveLocation.setOnClickListener { presenter.doSetLocation() }
     }
 
-    fun showDive(dive: DiveModel) {
+   override fun showDive(dive: DiveModel) {
         diveTitle.setText(dive.title)
         description.setText(dive.description)
         diveImage.setImageBitmap(readImageFromPath(this, dive.image))
         if (dive.image != null) {
             chooseImage.setText(R.string.change_dive_image)
         }
-        btnAdd.setText(R.string.save_dive)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -56,6 +48,13 @@ class DiveView : AppCompatActivity(), AnkoLogger {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
+            R.id.item_save -> {
+                if (diveTitle.text.toString().isEmpty()) {
+                    toast(R.string.enter_dive_title)
+                } else {
+                    presenter.doAddOrSave(diveTitle.text.toString(), description.text.toString())
+                }
+            }
             R.id.item_delete -> {
                 presenter.doDelete()
             }
@@ -71,5 +70,8 @@ class DiveView : AppCompatActivity(), AnkoLogger {
         if (data != null) {
             presenter.doActivityResult(requestCode, resultCode, data)
         }
+    }
+    override fun onBackPressed() {
+        presenter.doCancel()
     }
 }

@@ -18,4 +18,6 @@
     <string name="dive_image_placeholder">Dive Image</string>
     <string name="dive_title_placeholder">Dive Title</string>
     <string name="dive_description_placeholder">Dive Description</string>
+
+    <string name="menu_saveDive">Save</string>
 </resources>
