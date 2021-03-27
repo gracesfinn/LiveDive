@@ -21,7 +21,7 @@
         <activity
             android:name=".MapActivity"
             android:label="@string/title_activity_map" />
-        <activity android:name=".activities.DiveActivity" />
+        <activity android:name=".activities.DiveView" />
         <activity android:name=".activities.DiveListActivity">
 
         </activity>

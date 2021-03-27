@@ -38,7 +38,7 @@ class DiveListActivity: AppCompatActivity(), DiveListener {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
-            R.id.item_add -> startActivityForResult<DiveActivity>(0)
+            R.id.item_add -> startActivityForResult<DiveView>(0)
             R.id.item_map -> startActivity<DiveMapsActivity>()
         }
         return super.onOptionsItemSelected(item)
