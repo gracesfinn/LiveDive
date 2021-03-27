@@ -25,10 +25,15 @@ class DiveView : BaseView(), AnkoLogger {
 
         presenter = initPresenter(DivePresenter(this)) as DivePresenter
 
-        chooseImage.setOnClickListener { presenter.doSelectImage() }
+        chooseImage.setOnClickListener {
+            presenter.cacheDive(diveTitle.text.toString(), description.text.toString())
+            presenter.doSelectImage()
+        }
 
-
-        diveLocation.setOnClickListener { presenter.doSetLocation() }
+        diveLocation.setOnClickListener {
+            presenter.cacheDive(diveTitle.text.toString(), description.text.toString())
+            presenter.doSetLocation()
+        }
     }
 
    override fun showDive(dive: DiveModel) {

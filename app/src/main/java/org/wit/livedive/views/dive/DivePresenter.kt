@@ -81,4 +81,8 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
             }
         }
     }
+    fun cacheDive (title: String, description: String) {
+        dive.title = title;
+        dive.description = description
+    }
 }

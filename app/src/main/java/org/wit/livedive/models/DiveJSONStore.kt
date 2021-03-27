@@ -54,7 +54,8 @@ class DiveJSONStore : DiveStore, AnkoLogger {
     }
 
     override fun delete(dive: DiveModel) {
-        dives.remove(dive)
+        val foundDive: DiveModel? = dives.find { it.id == dive.id }
+        dives.remove(foundDive)
         serialize()
     }
 
