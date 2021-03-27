@@ -28,7 +28,8 @@ class DiveListActivity: AppCompatActivity(), DiveListener {
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         //recyclerView.adapter = DiveAdapter(app.dives)
-        recyclerView.adapter = DiveAdapter(app.dives.findAll(), this)
+        //recyclerView.adapter = DiveAdapter(app.dives.findAll(), this)
+        loadDives()
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -45,8 +46,18 @@ class DiveListActivity: AppCompatActivity(), DiveListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        recyclerView.adapter?.notifyDataSetChanged()
+        //recyclerView.adapter?.notifyDataSetChanged()
+        loadDives()
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun loadDives() {
+        showDives(app.dives.findAll())
+    }
+
+    fun showDives (dives: List<DiveModel>) {
+        recyclerView.adapter = DiveAdapter(dives, this)
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 
 
