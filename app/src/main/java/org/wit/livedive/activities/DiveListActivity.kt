@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_divelist.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
 import org.wit.livedive.R
 import org.wit.livedive.main.MainApp
@@ -38,6 +39,7 @@ class DiveListActivity: AppCompatActivity(), DiveListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.item_add -> startActivityForResult<DiveActivity>(0)
+            R.id.item_map -> startActivity<DiveMapsActivity>()
         }
         return super.onOptionsItemSelected(item)
     }

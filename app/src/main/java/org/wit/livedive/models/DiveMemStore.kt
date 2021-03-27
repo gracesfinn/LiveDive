@@ -36,7 +36,16 @@ class DiveMemStore : DiveStore, AnkoLogger {
         }
     }
 
+    override fun delete(dive: DiveModel) {
+        dives.remove(dive)
+    }
+
     fun logAll(){
         dives.forEach{ info("${it}")}
+    }
+
+    override fun findById(id:Long) : DiveModel? {
+        val foundDive: DiveModel? = dives.find { it.id == id }
+        return foundDive
     }
 }

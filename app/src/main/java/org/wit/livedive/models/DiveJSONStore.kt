@@ -40,7 +40,22 @@ class DiveJSONStore : DiveStore, AnkoLogger {
 
 
     override fun update(dive: DiveModel) {
-        // todo
+        val divesList = findAll() as ArrayList<DiveModel>
+        var foundDive: DiveModel? = divesList.find { p -> p.id == dive.id }
+        if (foundDive != null) {
+            foundDive.title = dive.title
+            foundDive.description = dive.description
+            foundDive.image = dive.image
+            foundDive.lat = dive.lat
+            foundDive.lng = dive.lng
+            foundDive.zoom = dive.zoom
+        }
+        serialize()
+    }
+
+    override fun delete(dive: DiveModel) {
+        dives.remove(dive)
+        serialize()
     }
 
     private fun serialize() {
@@ -51,5 +66,10 @@ class DiveJSONStore : DiveStore, AnkoLogger {
     private fun deserialize() {
         val jsonString = read(context, JSON_FILE)
         dives = Gson().fromJson(jsonString, listType)
+    }
+
+    override fun findById(id:Long) : DiveModel? {
+        val foundDive: DiveModel? = dives.find { it.id == id }
+        return foundDive
     }
 }

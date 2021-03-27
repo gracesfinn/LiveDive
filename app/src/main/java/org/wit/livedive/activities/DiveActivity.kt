@@ -27,6 +27,7 @@ class DiveActivity : AppCompatActivity() , AnkoLogger {
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
     //var location = Location(19.2869, -81.3674, 15f)
+    var edit = false;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,12 +88,17 @@ class DiveActivity : AppCompatActivity() , AnkoLogger {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_dive, menu)
+        if (edit && menu != null) menu.getItem(0).setVisible(true)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.item_cancel -> {
+                finish()
+            }
+            R.id.item_delete -> {
+                app.dives.delete(dive)
                 finish()
             }
         }
