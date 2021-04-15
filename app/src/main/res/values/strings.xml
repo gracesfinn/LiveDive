@@ -12,7 +12,7 @@
     <string name="select_dive_image">Select Dive Image</string>
     <string name="change_dive_image">Change Dive Image</string>
     <string name="button_location">Set Location</string>
-    <string name="title_activity_map">Map</string>
+    <string name="title_activity_map">Map of Dive Sites</string>
     <string name="menu_deleteDive">Delete</string>
 
     <string name="dive_image_placeholder">Dive Image</string>
@@ -20,4 +20,8 @@
     <string name="dive_description_placeholder">Dive Description</string>
 
     <string name="menu_saveDive">Save</string>
+
+    <string name="title_activity_dive_list">Dive Log</string>
+    <string name="title_activity_dive">Log Dive</string>
+    <string name="title_activity_location">Dive Sites</string>
 </resources>

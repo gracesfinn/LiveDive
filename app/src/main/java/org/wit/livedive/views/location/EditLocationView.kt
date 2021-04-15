@@ -1,40 +1,63 @@
 package org.wit.livedive.views.location
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.Marker
 import org.wit.livedive.BaseView
 import org.wit.livedive.R
+import org.wit.livedive.databinding.ActivityMapBinding
 
 
 class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
-    lateinit var map: GoogleMap
     lateinit var presenter: EditLocationPresenter
+    private lateinit var binding: ActivityMapBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_map)
+        binding = ActivityMapBinding.inflate(layoutInflater)
+        val view = binding.root
+        super.init(binding.toolbar, true)
+        setContentView(view)
 
+        presenter = initPresenter(EditLocationPresenter(this)) as EditLocationPresenter
 
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        presenter = EditLocationPresenter(this)
-        mapFragment.getMapAsync {
-            map = it
-            map.setOnMarkerDragListener(this)
-            map.setOnMarkerClickListener(this)
-            presenter.initMap(map)
+        binding.mapView.onCreate(savedInstanceState);
+        binding.mapView.getMapAsync {
+            it.setOnMarkerDragListener(this)
+            it.setOnMarkerClickListener(this)
+            presenter.doConfigureMap(it)
         }
+    }
+    override fun showLocation(latitude : Double, longitude : Double) {
+        binding.lat.setText("%.6f".format(latitude))
+        binding.lng.setText("%.6f".format(longitude))
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_edit_location, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item?.itemId) {
+            R.id.item_save -> {
+                presenter.doSave()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onMarkerDragStart(marker: Marker) {}
 
-    override fun onMarkerDrag(marker: Marker) {}
+    override fun onMarkerDrag(marker: Marker) {
+        binding.lat.setText("%.6f".format(marker.position.latitude))
+        binding.lng.setText("%.6f".format(marker.position.longitude))
+    }
 
     override fun onMarkerDragEnd(marker: Marker) {
-        presenter.doUpdateLocation(marker.position.latitude, marker.position.longitude, map.cameraPosition.zoom)
+        presenter.doUpdateLocation(marker.position.latitude, marker.position.longitude)
     }
 
     override fun onBackPressed() {
@@ -45,4 +68,30 @@ class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.O
         presenter.doUpdateMarker(marker)
         return false
     }
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.mapView.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        binding.mapView.onLowMemory()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.mapView.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.mapView.onResume()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        binding.mapView.onSaveInstanceState(outState)
+    }
+
+
 }

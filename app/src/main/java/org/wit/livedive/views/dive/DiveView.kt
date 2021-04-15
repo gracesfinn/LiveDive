@@ -27,8 +27,15 @@ class DiveView : BaseView(), AnkoLogger {
 
         binding = ActivityDiveBinding.inflate(layoutInflater)
         val view = binding.root
-        init(binding.toolbarAdd)
+        super.init(binding.toolbarAdd, true)
         setContentView(view)
+
+        binding.mapView.onCreate(savedInstanceState);
+        binding.mapView.getMapAsync {
+            map = it
+            presenter.doConfigureMap(map)
+            it.setOnMapClickListener { presenter.doSetLocation() }
+        }
 
         presenter = initPresenter(DivePresenter(this)) as DivePresenter
 
@@ -37,26 +44,17 @@ class DiveView : BaseView(), AnkoLogger {
             presenter.doSelectImage()
         }
 
-        binding.diveLocation.setOnClickListener {
-            presenter.cacheDive(binding.diveTitle.text.toString(), binding.description.text.toString())
-            presenter.doSetLocation()
-        }
-
-        binding.mapView.onCreate(savedInstanceState);
-        binding.mapView.getMapAsync {
-            map = it
-            presenter.doConfigureMap(map)
-        }
-
     }
 
    override fun showDive(dive: DiveModel) {
-       binding.diveTitle.setText(dive.title)
-       binding.description.setText(dive.description)
+       if(binding.diveTitle.text.isEmpty()) binding.diveTitle.setText(dive.title)
+       if(binding.description.text.isEmpty())binding.description.setText(dive.description)
        binding.diveImage.setImageBitmap(dive.image?.let { readImageFromPath(this, it) })
         if (dive.image != null) {
             binding.chooseImage.setText(R.string.change_dive_image)
         }
+       binding.lat.setText("%.6f".format(dive.lat))
+       binding.lng.setText("%.6f".format(dive.lng))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -112,6 +110,7 @@ class DiveView : BaseView(), AnkoLogger {
     override fun onResume() {
         super.onResume()
         binding.mapView.onResume()
+        presenter.doResartLocationUpdates()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

@@ -3,6 +3,7 @@ package org.wit.livedive
 import android.content.Intent
 import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import org.jetbrains.anko.AnkoLogger
 import org.wit.livedive.models.DiveModel
 import org.wit.livedive.views.dive.DiveView
@@ -40,10 +41,12 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
         return presenter
     }
 
-    fun init(toolbar: androidx.appcompat.widget.Toolbar) {
+    fun init(toolbar: Toolbar, upEnabled: Boolean) {
         toolbar.title = title
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(upEnabled)
     }
+
 
     override fun onDestroy() {
         basePresenter?.onDestroy()
@@ -64,6 +67,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
 
     open fun showDive(dive: DiveModel) {}
     open fun showDives(dives: List<DiveModel>) {}
+    open fun showLocation(latitude : Double, longitude : Double) {}
     open fun showProgress() {}
     open fun hideProgress() {}
 }

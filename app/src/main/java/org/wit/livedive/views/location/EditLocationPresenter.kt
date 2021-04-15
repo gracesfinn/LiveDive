@@ -19,7 +19,7 @@ class EditLocationPresenter (view: BaseView) : BasePresenter(view) {
         location = view.intent.extras?.getParcelable<Location>("location")!!
     }
 
-    fun initMap(map: GoogleMap) {
+    fun doConfigureMap(map: GoogleMap) {
         val loc = LatLng(location.lat, location.lng)
         val options = MarkerOptions()
             .title("Dive")
@@ -28,18 +28,25 @@ class EditLocationPresenter (view: BaseView) : BasePresenter(view) {
             .position(loc)
         map.addMarker(options)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
+        view?.showLocation(loc.latitude, loc.longitude);
     }
 
-    fun doUpdateLocation(lat: Double, lng: Double, zoom: Float) {
+    fun doUpdateLocation(lat: Double, lng: Double) {
         location.lat = lat
         location.lng = lng
-        location.zoom = zoom
+
     }
 
     fun doOnBackPressed() {
         val resultIntent = Intent()
         resultIntent.putExtra("location", location)
         view?.setResult(Activity.RESULT_OK, resultIntent)
+        view?.finish()
+    }
+    fun doSave() {
+        val resultIntent = Intent()
+        resultIntent.putExtra("location", location)
+        view?.setResult(0, resultIntent)
         view?.finish()
     }
 

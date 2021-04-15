@@ -1,4 +1,4 @@
-package org.wit.livedive.models
+package org.wit.livedive.models.json
 
 import android.content.Context
 import com.google.gson.Gson
@@ -6,6 +6,8 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
 import org.wit.livedive.helpers.*
+import org.wit.livedive.models.DiveModel
+import org.wit.livedive.models.DiveStore
 import java.util.*
 
 val JSON_FILE = "dives.json"

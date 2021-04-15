@@ -1,7 +1,9 @@
-package org.wit.livedive.models
+package org.wit.livedive.models.mem
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.wit.livedive.models.DiveModel
+import org.wit.livedive.models.DiveStore
 
 var lastId = 0L
 

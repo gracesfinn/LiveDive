@@ -24,7 +24,7 @@ class DiveMapView : BaseView(), GoogleMap.OnMarkerClickListener  {
         binding = ActivityDiveMapsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        super.init(binding.toolbar)
+        super.init(binding.toolbar, true)
 
         presenter = initPresenter(DiveMapPresenter(this)) as DiveMapPresenter
 

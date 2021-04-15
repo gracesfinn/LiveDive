@@ -12,18 +12,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LiveDive">
-        <activity android:name=".views.location.EditLocationView"/>
 
         <activity
-            android:name=".views.map.DiveMapView"/>
+            android:name=".views.location.EditLocationView"
+            android:label="@string/title_activity_location"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.dive.DiveView" />
+        </activity>
+
+        <activity
+            android:name=".views.map.DiveMapView"
+            android:label="@string/title_activity_map"
+            android:launchMode="singleTop">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".views.divelist.DiveListView" />
+        </activity>
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
 
-        <activity android:name=".views.dive.DiveView" />
-        <activity android:name=".views.divelist.DiveListView">
+        <activity android:name=".views.dive.DiveView"
+            android:label="@string/title_activity_dive">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.divelist.DiveListView" />
+        </activity>
+
+        <activity android:name=".views.divelist.DiveListView"
+            android:label="@string/title_activity_dive_list">
 
         </activity>
 

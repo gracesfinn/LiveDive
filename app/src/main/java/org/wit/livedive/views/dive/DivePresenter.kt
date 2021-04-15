@@ -3,15 +3,20 @@ package org.wit.livedive.views.dive
 import android.annotation.SuppressLint
 import android.content.Intent
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.wit.livedive.BasePresenter
 import org.wit.livedive.BaseView
 import org.wit.livedive.VIEW
 import org.wit.livedive.helpers.checkLocationPermissions
+import org.wit.livedive.helpers.createDefaultLocationRequest
 import org.wit.livedive.helpers.isPermissionGranted
 import org.wit.livedive.helpers.showImagePicker
 import org.wit.livedive.models.DiveModel
@@ -22,6 +27,7 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
 
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
+    val locationRequest = createDefaultLocationRequest()
 
     var map: GoogleMap? = null
 
@@ -44,15 +50,26 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         }
     }
 
+    @SuppressLint("MissingPermission")
+    fun doSetCurrentLocation() {
+        locationService.lastLocation.addOnSuccessListener {
+            locationUpdate(it.latitude, it.longitude)
+        }
+    }
+
     fun doAddOrSave(title: String, description: String) {
         dive.title = title
         dive.description = description
-        if (edit) {
-            app.dives.update(dive)
-        } else {
-            app.dives.create(dive)
+        doAsync {
+            if (edit) {
+                app.dives.update(dive)
+            } else {
+                app.dives.create(dive)
+            }
+            uiThread {
+                view?.finish()
+            }
         }
-        view?.finish()
     }
 
     fun doCancel() {
@@ -122,15 +139,24 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         if (isPermissionGranted(requestCode, grantResults)) {
             doSetCurrentLocation()
         } else {
-            // permissions denied, so use the default location
             locationUpdate(defaultLocation.lat, defaultLocation.lng)
         }
     }
 
+
+
     @SuppressLint("MissingPermission")
-    fun doSetCurrentLocation() {
-        locationService.lastLocation.addOnSuccessListener {
-            locationUpdate(it.latitude, it.longitude)
+    fun doResartLocationUpdates() {
+        var locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                if (locationResult != null && locationResult.locations != null) {
+                    val l = locationResult.locations.last()
+                    locationUpdate(l.latitude, l.longitude)
+                }
+            }
+        }
+        if (!edit) {
+            locationService.requestLocationUpdates(locationRequest, locationCallback, null)
         }
     }
 }
