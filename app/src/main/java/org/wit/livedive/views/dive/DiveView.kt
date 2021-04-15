@@ -4,11 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_dive.*
+import com.google.android.gms.maps.GoogleMap
+
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 import org.wit.livedive.BaseView
 import org.wit.livedive.R
+import org.wit.livedive.databinding.ActivityDiveBinding
 import org.wit.livedive.helpers.readImageFromPath
 import org.wit.livedive.models.DiveModel
 
@@ -16,32 +18,44 @@ class DiveView : BaseView(), AnkoLogger {
 
     lateinit var presenter: DivePresenter
     var dive = DiveModel()
+    lateinit var map: GoogleMap
+    private lateinit var binding: ActivityDiveBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dive)
 
-        init(toolbarAdd)
+        binding = ActivityDiveBinding.inflate(layoutInflater)
+        val view = binding.root
+        init(binding.toolbarAdd)
+        setContentView(view)
 
         presenter = initPresenter(DivePresenter(this)) as DivePresenter
 
-        chooseImage.setOnClickListener {
-            presenter.cacheDive(diveTitle.text.toString(), description.text.toString())
+        binding.chooseImage.setOnClickListener {
+            presenter.cacheDive(binding.diveTitle.text.toString(), binding.description.text.toString())
             presenter.doSelectImage()
         }
 
-        diveLocation.setOnClickListener {
-            presenter.cacheDive(diveTitle.text.toString(), description.text.toString())
+        binding.diveLocation.setOnClickListener {
+            presenter.cacheDive(binding.diveTitle.text.toString(), binding.description.text.toString())
             presenter.doSetLocation()
         }
+
+        binding.mapView.onCreate(savedInstanceState);
+        binding.mapView.getMapAsync {
+            map = it
+            presenter.doConfigureMap(map)
+        }
+
     }
 
    override fun showDive(dive: DiveModel) {
-        diveTitle.setText(dive.title)
-        description.setText(dive.description)
-        diveImage.setImageBitmap(readImageFromPath(this, dive.image))
+       binding.diveTitle.setText(dive.title)
+       binding.description.setText(dive.description)
+       binding.diveImage.setImageBitmap(dive.image?.let { readImageFromPath(this, it) })
         if (dive.image != null) {
-            chooseImage.setText(R.string.change_dive_image)
+            binding.chooseImage.setText(R.string.change_dive_image)
         }
     }
 
@@ -54,10 +68,10 @@ class DiveView : BaseView(), AnkoLogger {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.item_save -> {
-                if (diveTitle.text.toString().isEmpty()) {
+                if (binding.diveTitle.text.toString().isEmpty()) {
                     toast(R.string.enter_dive_title)
                 } else {
-                    presenter.doAddOrSave(diveTitle.text.toString(), description.text.toString())
+                    presenter.doAddOrSave(binding.diveTitle.text.toString(), binding.description.text.toString())
                 }
             }
             R.id.item_delete -> {
@@ -78,5 +92,30 @@ class DiveView : BaseView(), AnkoLogger {
     }
     override fun onBackPressed() {
         presenter.doCancel()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.mapView.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        binding.mapView.onLowMemory()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.mapView.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.mapView.onResume()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        binding.mapView.onSaveInstanceState(outState)
     }
 }

@@ -9,10 +9,12 @@ import android.view.WindowManager
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.livedive.R
+import org.wit.livedive.databinding.ActivitySplashBinding
 import org.wit.livedive.views.divelist.DiveListView
 
 
 class SplashActivity : AppCompatActivity(), AnkoLogger {
+    private lateinit var binding: ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +25,8 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        val view = binding.root
         setContentView(R.layout.activity_splash)
 
         //4second splash time

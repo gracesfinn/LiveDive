@@ -1,15 +1,21 @@
 package org.wit.livedive.views.dive
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import org.jetbrains.anko.intentFor
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.livedive.BasePresenter
 import org.wit.livedive.BaseView
 import org.wit.livedive.VIEW
+import org.wit.livedive.helpers.checkLocationPermissions
+import org.wit.livedive.helpers.isPermissionGranted
 import org.wit.livedive.helpers.showImagePicker
-import org.wit.livedive.main.MainApp
 import org.wit.livedive.models.DiveModel
 import org.wit.livedive.models.Location
-import org.wit.livedive.views.location.EditLocationView
 
 
 class DivePresenter(view: BaseView) : BasePresenter(view) {
@@ -17,16 +23,24 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
 
+    var map: GoogleMap? = null
+
     var dive = DiveModel()
     var defaultLocation = Location(19.2869, -81.3674, 15f)
     var edit = false;
+    var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
+
 
     init {
-        app = view.application as MainApp
+
         if (view.intent.hasExtra("dive_edit")) {
             edit = true
             dive = view.intent.extras?.getParcelable<DiveModel>("dive_edit")!!
             view.showDive(dive)
+        } else {
+            if (checkLocationPermissions(view)) {
+                doSetCurrentLocation()
+            }
         }
     }
 
@@ -56,7 +70,7 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
 
     fun doSetLocation() {
         if (edit == false) {
-            view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", defaultLocation)
+            view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(dive.lat, dive.lng, dive.zoom))
         } else {
             view?.navigateTo(
                 VIEW.LOCATION,
@@ -78,11 +92,45 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
                 dive.lat = location.lat
                 dive.lng = location.lng
                 dive.zoom = location.zoom
+                locationUpdate(dive.lat, dive.lng)
             }
         }
     }
     fun cacheDive (title: String, description: String) {
         dive.title = title;
         dive.description = description
+    }
+
+    fun doConfigureMap(m: GoogleMap) {
+        map = m
+        locationUpdate(dive.lat, dive.lng)
+    }
+
+    fun locationUpdate(lat: Double, lng: Double) {
+        dive.lat = lat
+        dive.lng = lng
+        dive.zoom = 15f
+        map?.clear()
+        map?.uiSettings?.setZoomControlsEnabled(true)
+        val options = MarkerOptions().title(dive.title).position(LatLng(dive.lat, dive.lng))
+        map?.addMarker(options)
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(dive.lat, dive.lng), dive.zoom))
+        view?.showDive(dive)
+    }
+
+    override fun doRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (isPermissionGranted(requestCode, grantResults)) {
+            doSetCurrentLocation()
+        } else {
+            // permissions denied, so use the default location
+            locationUpdate(defaultLocation.lat, defaultLocation.lng)
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun doSetCurrentLocation() {
+        locationService.lastLocation.addOnSuccessListener {
+            locationUpdate(it.latitude, it.longitude)
+        }
     }
 }

@@ -4,9 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
-import kotlinx.android.synthetic.main.activity_dive_maps.*
+
 import org.wit.livedive.BaseView
 import org.wit.livedive.R
+import org.wit.livedive.databinding.ActivityDiveMapsBinding
 import org.wit.livedive.helpers.readImageFromPath
 import org.wit.livedive.models.DiveModel
 
@@ -14,16 +15,21 @@ class DiveMapView : BaseView(), GoogleMap.OnMarkerClickListener  {
 
     lateinit var presenter: DiveMapPresenter
     lateinit var map : GoogleMap
+    private lateinit var binding: ActivityDiveMapsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dive_maps)
-        super.init(toolbar)
+
+
+        binding = ActivityDiveMapsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        super.init(binding.toolbar)
 
         presenter = initPresenter(DiveMapPresenter(this)) as DiveMapPresenter
 
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync {
+        binding.mapView.onCreate(savedInstanceState);
+        binding.mapView.getMapAsync {
             map = it
             map.setOnMarkerClickListener(this)
             presenter.loadDives()
@@ -31,9 +37,9 @@ class DiveMapView : BaseView(), GoogleMap.OnMarkerClickListener  {
     }
 
     override fun showDive(dive: DiveModel) {
-        currentTitle.text = dive.title
-        currentDescription.text = dive.description
-        currentImage.setImageBitmap(readImageFromPath(this, dive.image))
+        binding.currentTitle.text = dive.title
+        binding.currentDescription.text = dive.description
+        binding.currentImage.setImageBitmap(dive.image?.let { readImageFromPath(this, it) })
     }
 
     override fun showDives(dives: List<DiveModel>) {
@@ -47,26 +53,26 @@ class DiveMapView : BaseView(), GoogleMap.OnMarkerClickListener  {
 
     override fun onDestroy() {
         super.onDestroy()
-        mapView.onDestroy()
+        binding.mapView.onDestroy()
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        mapView.onLowMemory()
+        binding.mapView.onLowMemory()
     }
 
     override fun onPause() {
         super.onPause()
-        mapView.onPause()
+        binding.mapView.onPause()
     }
 
     override fun onResume() {
         super.onResume()
-        mapView.onResume()
+        binding.mapView.onResume()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
+        binding.mapView.onSaveInstanceState(outState)
     }
 }
