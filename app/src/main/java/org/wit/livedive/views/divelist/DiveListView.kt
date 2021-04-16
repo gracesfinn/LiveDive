@@ -48,6 +48,7 @@ class DiveListView :  BaseView(), DiveListener {
         when (item?.itemId) {
             R.id.item_add -> presenter.doAddDive()
             R.id.item_map -> presenter.doShowDivesMap()
+            R.id.item_logout ->presenter.doLogout()
         }
         return super.onOptionsItemSelected(item)
     }

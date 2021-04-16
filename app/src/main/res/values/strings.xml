@@ -24,4 +24,11 @@
     <string name="title_activity_dive_list">Dive Log</string>
     <string name="title_activity_dive">Log Dive</string>
     <string name="title_activity_location">Dive Sites</string>
+
+    <string name="title_activity_login"> Signup/Login to Live Dive</string>
+
+
+    <string name="menu_showMap">Map</string>
+    <string name="menu_logout">Logout</string>
+
 </resources>

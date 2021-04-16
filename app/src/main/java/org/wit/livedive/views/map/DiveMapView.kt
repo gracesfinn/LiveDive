@@ -35,9 +35,15 @@ class DiveMapView : BaseView(), GoogleMap.OnMarkerClickListener  {
     }
 
     override fun showDive(dive: DiveModel?) {
-        binding.currentTitle.text = dive.title
-        binding.currentDescription.text = dive.description
-        binding.currentImage.setImageBitmap(dive.image?.let { readImageFromPath(this, it) })
+        if (dive != null) {
+            binding.currentTitle.text = dive.title
+        }
+        if (dive != null) {
+            binding.currentDescription.text = dive.description
+        }
+        if (dive != null) {
+            binding.currentImage.setImageBitmap(dive.image?.let { readImageFromPath(this, it) })
+        }
     }
 
     override fun showDives(dives: List<DiveModel>) {

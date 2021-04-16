@@ -10,13 +10,14 @@ import org.wit.livedive.models.Location
 import org.wit.livedive.views.dive.DiveView
 import org.wit.livedive.views.divelist.DiveListView
 import org.wit.livedive.views.location.EditLocationView
+import org.wit.livedive.views.login.LoginView
 import org.wit.livedive.views.map.DiveMapView
 
 val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2
 
 enum class VIEW {
-    LOCATION, DIVE, MAPS, LIST
+    LOCATION, DIVE, MAPS, LIST, LOGIN
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -30,6 +31,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
             VIEW.DIVE -> intent = Intent(this, DiveView::class.java)
             VIEW.MAPS -> intent = Intent(this, DiveMapView::class.java)
             VIEW.LIST -> intent = Intent(this, DiveListView::class.java)
+            VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
         }
         if (key != "") {
             intent.putExtra(key, value)

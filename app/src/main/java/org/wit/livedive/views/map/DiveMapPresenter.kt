@@ -16,10 +16,10 @@ class DiveMapPresenter (view: BaseView) : BasePresenter(view) {
     fun doPopulateMap(map: GoogleMap, dives: List<DiveModel>) {
         map.uiSettings.setZoomControlsEnabled(true)
         dives.forEach {
-                val loc = LatLng(it.lat, it.lng)
+                val loc = LatLng(it.location.lat, it.location.lng)
                 val options = MarkerOptions().title(it.title).position(loc)
                 map.addMarker(options).tag = it.id
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
         }
     }
 

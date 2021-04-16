@@ -11,6 +11,7 @@ import org.jetbrains.anko.info
 import org.wit.livedive.R
 import org.wit.livedive.databinding.ActivitySplashBinding
 import org.wit.livedive.views.divelist.DiveListView
+import org.wit.livedive.views.login.LoginView
 
 
 class SplashActivity : AppCompatActivity(), AnkoLogger {
@@ -32,7 +33,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         //4second splash time
         Handler().postDelayed({
             //start main activity
-            startActivity(Intent(this@SplashActivity, DiveListView::class.java))
+            startActivity(Intent(this@SplashActivity, LoginView::class.java))
             info("Splash Activity started..")
             //finish this activity
             finish()

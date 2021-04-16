@@ -1,8 +1,6 @@
 package org.wit.livedive.views.divelist
 
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.startActivityForResult
+import org.jetbrains.anko.*
 import org.wit.livedive.BasePresenter
 import org.wit.livedive.BaseView
 import org.wit.livedive.VIEW
@@ -25,7 +23,16 @@ class DiveListPresenter (view: BaseView) : BasePresenter(view) {
     fun doShowDivesMap() {
         view?.navigateTo(VIEW.MAPS)
     }
+
     fun loadDives() {
-        view?.showDives(app.dives.findAll())
+        doAsync {
+            val dives = app.dives.findAll()
+            uiThread {
+                view?.showDives(dives)
+            }
+        }
+    }
+    fun doLogout() {
+        view?.navigateTo(VIEW.LOGIN)
     }
 }
