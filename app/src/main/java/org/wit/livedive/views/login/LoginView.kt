@@ -1,6 +1,7 @@
 package org.wit.livedive.views.login
 
 import android.os.Bundle
+import android.view.View
 import org.jetbrains.anko.toast
 import org.wit.livedive.BaseView
 import org.wit.livedive.databinding.ActivityLoginBinding
@@ -18,6 +19,7 @@ class LoginView : BaseView() {
         val view = binding.root
         super.init(binding.toolbar, false)
         setContentView(view)
+        binding.progressBar.visibility = View.GONE
 
 
         presenter = initPresenter(LoginPresenter(this)) as LoginPresenter
@@ -43,5 +45,13 @@ class LoginView : BaseView() {
                 presenter.doLogin(email,password)
             }
         }
+    }
+
+    override fun showProgress() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        binding.progressBar.visibility = View.GONE
     }
 }

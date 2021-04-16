@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "63862055988",
+    "project_id": "livedivetracker",
+    "storage_bucket": "livedivetracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63862055988:android:4fdaba953a094761459661",
+        "android_client_info": {
+          "package_name": "org.wit.livedive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63862055988-vrjf9hura4fd2ifj380j2habi916gcj8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSuEKHJDVP7X9sFkD7XNVV-71VVQUH-xM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "63862055988-vrjf9hura4fd2ifj380j2habi916gcj8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

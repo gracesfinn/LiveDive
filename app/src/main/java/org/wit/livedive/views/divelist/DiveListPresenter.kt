@@ -1,5 +1,6 @@
 package org.wit.livedive.views.divelist
 
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.*
 import org.wit.livedive.BasePresenter
 import org.wit.livedive.BaseView
@@ -32,7 +33,9 @@ class DiveListPresenter (view: BaseView) : BasePresenter(view) {
             }
         }
     }
+
     fun doLogout() {
+        FirebaseAuth.getInstance().signOut()
         view?.navigateTo(VIEW.LOGIN)
     }
 }
