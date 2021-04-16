@@ -77,8 +77,12 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun doDelete() {
-        app.dives.delete(dive)
-        view?.finish()
+        doAsync {
+            app.dives.delete(dive)
+            uiThread {
+                view?.finish()
+            }
+        }
     }
 
     fun doSelectImage() {
@@ -87,13 +91,13 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
 
     fun doSetLocation() {
         if (edit == false) {
-            view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(dive.lat, dive.lng, dive.zoom))
+            view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(dive.location.lat, dive.location.lng, dive.location.zoom))
         } else {
             view?.navigateTo(
                 VIEW.LOCATION,
                 LOCATION_REQUEST,
                 "location",
-                Location(dive.lat, dive.lng, dive.zoom)
+                Location(dive.location.lat, dive.location.lng, dive.location.zoom)
             )
         }
     }
@@ -106,10 +110,8 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
             }
             LOCATION_REQUEST -> {
                 val location = data.extras?.getParcelable<Location>("location")!!
-                dive.lat = location.lat
-                dive.lng = location.lng
-                dive.zoom = location.zoom
-                locationUpdate(dive.lat, dive.lng)
+                dive.location  = location
+                locationUpdate(dive.location.lat, dive.location.lng)
             }
         }
     }
@@ -120,18 +122,18 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
 
     fun doConfigureMap(m: GoogleMap) {
         map = m
-        locationUpdate(dive.lat, dive.lng)
+        locationUpdate(dive.location.lat, dive.location.lng)
     }
 
     fun locationUpdate(lat: Double, lng: Double) {
-        dive.lat = lat
-        dive.lng = lng
-        dive.zoom = 15f
+        dive.location.lat = lat
+        dive.location.lng = lng
+        dive.location.zoom = 15f
         map?.clear()
         map?.uiSettings?.setZoomControlsEnabled(true)
-        val options = MarkerOptions().title(dive.title).position(LatLng(dive.lat, dive.lng))
+        val options = MarkerOptions().title(dive.title).position(LatLng(dive.location.lat, dive.location.lng))
         map?.addMarker(options)
-        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(dive.lat, dive.lng), dive.zoom))
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(dive.location.lat, dive.location.lng), dive.location.zoom))
         view?.showDive(dive)
     }
 
@@ -157,6 +159,15 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         }
         if (!edit) {
             locationService.requestLocationUpdates(locationRequest, locationCallback, null)
+        }
+    }
+
+    fun loadDives() {
+        doAsync {
+            val dives = app.dives.findAll()
+            uiThread {
+                view?.showDives(dives)
+            }
         }
     }
 }

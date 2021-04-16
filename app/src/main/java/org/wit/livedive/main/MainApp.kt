@@ -5,6 +5,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.livedive.models.DiveStore
 import org.wit.livedive.models.json.DiveJSONStore
+import org.wit.livedive.models.room.DiveStoreRoom
 
 class MainApp: Application(), AnkoLogger {
 
@@ -14,7 +15,7 @@ class MainApp: Application(), AnkoLogger {
 
     override fun onCreate() {
         super.onCreate()
-        dives = DiveJSONStore(applicationContext)
+        dives = DiveStoreRoom(applicationContext)
         info("LiveDive started")
 
     }

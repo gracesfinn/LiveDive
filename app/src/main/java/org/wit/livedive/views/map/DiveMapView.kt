@@ -1,12 +1,10 @@
 package org.wit.livedive.views.map
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 
 import org.wit.livedive.BaseView
-import org.wit.livedive.R
 import org.wit.livedive.databinding.ActivityDiveMapsBinding
 import org.wit.livedive.helpers.readImageFromPath
 import org.wit.livedive.models.DiveModel
@@ -36,7 +34,7 @@ class DiveMapView : BaseView(), GoogleMap.OnMarkerClickListener  {
         }
     }
 
-    override fun showDive(dive: DiveModel) {
+    override fun showDive(dive: DiveModel?) {
         binding.currentTitle.text = dive.title
         binding.currentDescription.text = dive.description
         binding.currentImage.setImageBitmap(dive.image?.let { readImageFromPath(this, it) })

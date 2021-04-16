@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import org.jetbrains.anko.AnkoLogger
 import org.wit.livedive.models.DiveModel
+import org.wit.livedive.models.Location
 import org.wit.livedive.views.dive.DiveView
 import org.wit.livedive.views.divelist.DiveListView
 import org.wit.livedive.views.location.EditLocationView
@@ -65,9 +66,9 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
         basePresenter?.doRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    open fun showDive(dive: DiveModel) {}
+    open fun showDive(dive: DiveModel?) {}
     open fun showDives(dives: List<DiveModel>) {}
-    open fun showLocation(latitude : Double, longitude : Double) {}
+    open fun showLocation(location : Location) {}
     open fun showProgress() {}
     open fun hideProgress() {}
 }

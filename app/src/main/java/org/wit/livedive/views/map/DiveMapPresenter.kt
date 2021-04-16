@@ -5,9 +5,10 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.wit.livedive.BasePresenter
 import org.wit.livedive.BaseView
-import org.wit.livedive.main.MainApp
 import org.wit.livedive.models.DiveModel
 
 class DiveMapPresenter (view: BaseView) : BasePresenter(view) {
@@ -24,11 +25,20 @@ class DiveMapPresenter (view: BaseView) : BasePresenter(view) {
 
     fun doMarkerSelected(marker: Marker) {
         val tag = marker.tag as Long
-        val dive = app.dives.findById(tag)
-        if (dive != null) view?.showDive(dive)
+        doAsync {
+            val dive = app.dives.findById(tag)
+            uiThread {
+                if (dive != null) view?.showDive(dive)
+            }
+        }
     }
 
     fun loadDives() {
-        view?.showDives(app.dives.findAll())
+        doAsync {
+            val dives = app.dives.findAll()
+            uiThread {
+                view?.showDives(dives)
+            }
+        }
     }
 }

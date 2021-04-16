@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.Marker
 import org.wit.livedive.BaseView
 import org.wit.livedive.R
 import org.wit.livedive.databinding.ActivityMapBinding
+import org.wit.livedive.models.Location
 
 
 class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
@@ -31,9 +32,9 @@ class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.O
             presenter.doConfigureMap(it)
         }
     }
-    override fun showLocation(latitude : Double, longitude : Double) {
-        binding.lat.setText("%.6f".format(latitude))
-        binding.lng.setText("%.6f".format(longitude))
+    override fun showLocation(location: Location) {
+        binding.lat.setText("%.6f".format(location.lat))
+        binding.lng.setText("%.6f".format(location.lng))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -13,6 +13,7 @@ import org.wit.livedive.R
 import org.wit.livedive.databinding.ActivityDiveBinding
 import org.wit.livedive.helpers.readImageFromPath
 import org.wit.livedive.models.DiveModel
+import org.wit.livedive.models.Location
 
 class DiveView : BaseView(), AnkoLogger {
 
@@ -46,16 +47,29 @@ class DiveView : BaseView(), AnkoLogger {
 
     }
 
-   override fun showDive(dive: DiveModel) {
-       if(binding.diveTitle.text.isEmpty()) binding.diveTitle.setText(dive.title)
-       if(binding.description.text.isEmpty())binding.description.setText(dive.description)
-       binding.diveImage.setImageBitmap(dive.image?.let { readImageFromPath(this, it) })
-        if (dive.image != null) {
-            binding.chooseImage.setText(R.string.change_dive_image)
-        }
-       binding.lat.setText("%.6f".format(dive.lat))
-       binding.lng.setText("%.6f".format(dive.lng))
-    }
+   override fun showDive(dive: DiveModel?) {
+       if (binding.diveTitle.text.isEmpty()) if (dive != null) {
+           binding.diveTitle.setText(dive.title)
+       }
+       if (binding.description.text.isEmpty()) if (dive != null) {
+           binding.description.setText(dive.description)
+       }
+       if (dive != null) {
+           binding.diveImage.setImageBitmap(dive.image?.let { readImageFromPath(this, it) })
+       }
+       if (dive != null) {
+           if (dive.image != null) {
+               binding.chooseImage.setText(R.string.change_dive_image)
+           }
+           this.showLocation(dive.location)
+       }
+   }
+       override fun showLocation (loc: Location){
+           binding.lat.setText("%.6f".format(dive.location.lat))
+           binding.lng.setText("%.6f".format(dive.location.lng))
+       }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_dive, menu)
@@ -117,4 +131,6 @@ class DiveView : BaseView(), AnkoLogger {
         super.onSaveInstanceState(outState)
         binding.mapView.onSaveInstanceState(outState)
     }
+
+
 }
