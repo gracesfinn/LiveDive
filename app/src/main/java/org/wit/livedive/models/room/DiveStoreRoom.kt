@@ -35,5 +35,9 @@ class DiveStoreRoom(val context: Context) : DiveStore {
     override fun delete(dive: DiveModel) {
         dao.deleteDive(dive)
     }
+
+    override fun clear() {
+
+    }
 }
 

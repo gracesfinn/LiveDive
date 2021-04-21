@@ -27,14 +27,13 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
 
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
-    val locationRequest = createDefaultLocationRequest()
-
     var map: GoogleMap? = null
-
     var dive = DiveModel()
     var defaultLocation = Location(19.2869, -81.3674, 15f)
     var edit = false;
+    var locationManualyChanged = false;
     var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
+    val locationRequest = createDefaultLocationRequest()
 
 
     init {
@@ -53,8 +52,54 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
     @SuppressLint("MissingPermission")
     fun doSetCurrentLocation() {
         locationService.lastLocation.addOnSuccessListener {
-            locationUpdate(it.latitude, it.longitude)
+            locationUpdate(Location(it.latitude, it.longitude))
         }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun doResartLocationUpdates() {
+        var locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                if (locationResult != null && locationResult.locations != null) {
+                    val l = locationResult.locations.last()
+                    if(!locationManualyChanged) {
+                        locationUpdate(Location(l.latitude, l.longitude))
+                    }
+                }
+            }
+        }
+        if (!edit) {
+            locationService.requestLocationUpdates(locationRequest, locationCallback, null)
+        }
+    }
+
+    override fun doRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (isPermissionGranted(requestCode, grantResults)) {
+            doSetCurrentLocation()
+        } else {
+            locationUpdate(defaultLocation)
+        }
+    }
+
+    fun cacheDive (title: String, description: String) {
+        dive.title = title;
+        dive.description = description
+    }
+
+    fun doConfigureMap(m: GoogleMap) {
+        map = m
+        locationUpdate(dive.location)
+    }
+
+    fun locationUpdate(location: Location) {
+        dive.location = location
+        dive.location.zoom = 15f
+        map?.clear()
+        map?.uiSettings?.setZoomControlsEnabled(true)
+        val options = MarkerOptions().title(dive.title).position(LatLng(dive.location.lat, dive.location.lng))
+        map?.addMarker(options)
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(dive.location.lat, dive.location.lng), dive.location.zoom))
+        view?.showDive(dive)
     }
 
     fun doAddOrSave(title: String, description: String) {
@@ -90,16 +135,9 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun doSetLocation() {
-        if (edit == false) {
+        locationManualyChanged = true;
             view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(dive.location.lat, dive.location.lng, dive.location.zoom))
-        } else {
-            view?.navigateTo(
-                VIEW.LOCATION,
-                LOCATION_REQUEST,
-                "location",
-                Location(dive.location.lat, dive.location.lng, dive.location.zoom)
-            )
-        }
+
     }
 
     override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
@@ -111,62 +149,7 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
             LOCATION_REQUEST -> {
                 val location = data.extras?.getParcelable<Location>("location")!!
                 dive.location  = location
-                locationUpdate(dive.location.lat, dive.location.lng)
-            }
-        }
-    }
-    fun cacheDive (title: String, description: String) {
-        dive.title = title;
-        dive.description = description
-    }
-
-    fun doConfigureMap(m: GoogleMap) {
-        map = m
-        locationUpdate(dive.location.lat, dive.location.lng)
-    }
-
-    fun locationUpdate(lat: Double, lng: Double) {
-        dive.location.lat = lat
-        dive.location.lng = lng
-        dive.location.zoom = 15f
-        map?.clear()
-        map?.uiSettings?.setZoomControlsEnabled(true)
-        val options = MarkerOptions().title(dive.title).position(LatLng(dive.location.lat, dive.location.lng))
-        map?.addMarker(options)
-        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(dive.location.lat, dive.location.lng), dive.location.zoom))
-        view?.showDive(dive)
-    }
-
-    override fun doRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        if (isPermissionGranted(requestCode, grantResults)) {
-            doSetCurrentLocation()
-        } else {
-            locationUpdate(defaultLocation.lat, defaultLocation.lng)
-        }
-    }
-
-
-
-    @SuppressLint("MissingPermission")
-    fun doResartLocationUpdates() {
-        var locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult?) {
-                if (locationResult != null && locationResult.locations != null) {
-                    val l = locationResult.locations.last()
-                    locationUpdate(l.latitude, l.longitude)
-                }
-            }
-        }
-        if (!edit) {
-            locationService.requestLocationUpdates(locationRequest, locationCallback, null)
-        }
-    }
-
-    fun loadDives() {
-        doAsync {
-            val dives = app.dives.findAll()
-            uiThread {
-                view?.showDives(dives)
+                locationUpdate(location)
             }
         }
     }

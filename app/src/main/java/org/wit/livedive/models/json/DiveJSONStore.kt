@@ -73,4 +73,7 @@ class DiveJSONStore : DiveStore, AnkoLogger {
         val foundDive: DiveModel? = dives.find { it.id == id }
         return foundDive
     }
+    override fun clear() {
+        dives.clear()
+    }
 }

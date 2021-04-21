@@ -35,6 +35,9 @@ class DiveMemStore : DiveStore, AnkoLogger {
             logAll();
         }
     }
+    override fun clear() {
+        dives.clear()
+    }
 
     override fun delete(dive: DiveModel) {
         dives.remove(dive)

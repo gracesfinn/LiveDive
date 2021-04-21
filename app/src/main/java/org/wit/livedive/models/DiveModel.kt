@@ -10,6 +10,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class DiveModel(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
+    var fbId : String? = "",
     var title: String? = "",
     var description: String? = "",
     var image: String? = "",
@@ -20,12 +21,14 @@ data class DiveModel(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readString(),
 
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(id)
+        parcel.writeString(fbId)
         parcel.writeString(title)
         parcel.writeString(description)
         parcel.writeString(image)

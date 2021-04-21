@@ -6,4 +6,6 @@ interface DiveStore {
     fun update(dive: DiveModel)
     fun delete(dive: DiveModel)
     fun findById(id:Long) : DiveModel?
+    fun clear()
+
 }

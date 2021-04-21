@@ -40,10 +40,6 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
         startActivityForResult(intent, code)
     }
 
-    fun initPresenter(presenter: BasePresenter): BasePresenter {
-        basePresenter = presenter
-        return presenter
-    }
 
     fun init(toolbar: Toolbar, upEnabled: Boolean) {
         toolbar.title = title
@@ -54,6 +50,20 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
             toolbar.title = "${title}: ${user.email}"
         }
     }
+
+
+
+    fun initPresenter(presenter: BasePresenter): BasePresenter {
+        basePresenter = presenter
+        return presenter
+    }
+
+    fun init(toolbar: Toolbar) {
+        toolbar.title = title
+        setSupportActionBar(toolbar)
+    }
+
+
 
 
     override fun onDestroy() {

@@ -36,6 +36,7 @@ class DiveListPresenter (view: BaseView) : BasePresenter(view) {
 
     fun doLogout() {
         FirebaseAuth.getInstance().signOut()
+        app.dives.clear()
         view?.navigateTo(VIEW.LOGIN)
     }
 }
