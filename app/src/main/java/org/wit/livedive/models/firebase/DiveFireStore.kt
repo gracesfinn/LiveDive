@@ -30,12 +30,12 @@ class DiveFireStore(val context: Context) : DiveStore, AnkoLogger {
     }
 
     override fun create(dive: DiveModel) {
+        db = FirebaseDatabase.getInstance().reference
         val key = db.child("users").child(userId).child("dives").push().key
         key?.let {
             dive.fbId = key
             dives.add(dive)
             db.child("users").child(userId).child("dives").child(key).setValue(dive)
-            updateImage(dive)
         }
     }
 

@@ -30,20 +30,23 @@ class DiveView : BaseView(), AnkoLogger {
         val view = binding.root
         super.init(binding.toolbarAdd, true)
         setContentView(view)
+        presenter = initPresenter(DivePresenter(this)) as DivePresenter
 
         binding.mapView.onCreate(savedInstanceState);
         binding.mapView.getMapAsync {
             map = it
             presenter.doConfigureMap(map)
             it.setOnMapClickListener { presenter.doSetLocation() }
-        }
+        } //Location Selector
 
-        presenter = initPresenter(DivePresenter(this)) as DivePresenter
+
 
         binding.chooseImage.setOnClickListener {
-            presenter.cacheDive(binding.diveTitle.text.toString(), binding.description.text.toString())
+            presenter.cacheDive(
+                    binding.diveTitle.text.toString(),
+                    binding.description.text.toString())
             presenter.doSelectImage()
-        }
+        } //Image Selector
 
     }
 
@@ -63,11 +66,12 @@ class DiveView : BaseView(), AnkoLogger {
            }
            this.showLocation(dive.location)
        }
-   }
+   }  // Edit Dive
+
        override fun showLocation (loc: Location){
-           binding.lat.setText("%.6f".format(dive.location.lat))
-           binding.lng.setText("%.6f".format(dive.location.lng))
-       }
+           binding.lat.setText("%.6f".format(loc.lat))
+           binding.lng.setText("%.6f".format(loc.lng))
+       } //
 
 
 
@@ -83,7 +87,10 @@ class DiveView : BaseView(), AnkoLogger {
                 if (binding.diveTitle.text.toString().isEmpty()) {
                     toast(R.string.enter_dive_title)
                 } else {
-                    presenter.doAddOrSave(binding.diveTitle.text.toString(), binding.description.text.toString())
+                    presenter.doAddOrSave(
+                            binding.diveTitle.text.toString(),
+                            binding.description.text.toString()
+                    )
                 }
             }
             R.id.item_delete -> {
@@ -94,7 +101,7 @@ class DiveView : BaseView(), AnkoLogger {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
+    } //When Buttons are pressed
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

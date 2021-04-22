@@ -99,7 +99,7 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         val options = MarkerOptions().title(dive.title).position(LatLng(dive.location.lat, dive.location.lng))
         map?.addMarker(options)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(dive.location.lat, dive.location.lng), dive.location.zoom))
-        view?.showDive(dive)
+        view?.showLocation(dive.location)
     }
 
     fun doAddOrSave(title: String, description: String) {
@@ -143,8 +143,10 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
     override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         when (requestCode) {
             IMAGE_REQUEST -> {
-                dive.image = data.data.toString()
-                view?.showDive(dive)
+                if (data != null) {
+                    dive.image = data.getData().toString()
+                    view?.showDive(dive)
+                }
             }
             LOCATION_REQUEST -> {
                 val location = data.extras?.getParcelable<Location>("location")!!

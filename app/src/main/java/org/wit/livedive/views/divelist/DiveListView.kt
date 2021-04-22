@@ -26,7 +26,7 @@ class DiveListView :  BaseView(), DiveListener {
         val view = binding.root
         setContentView(view)
         super.init(binding.toolbar, false)
-        
+
 
 
         presenter = initPresenter(DiveListPresenter(this)) as DiveListPresenter
