@@ -17,7 +17,7 @@ class LoginView : BaseView() {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
-        super.init(binding.toolbar, false)
+        super.initLogin(binding.toolbar)
         setContentView(view)
         binding.progressBar.visibility = View.GONE
 

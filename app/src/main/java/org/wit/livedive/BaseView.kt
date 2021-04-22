@@ -58,7 +58,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
         return presenter
     }
 
-    fun init(toolbar: Toolbar) {
+    fun initLogin(toolbar: Toolbar) {
         toolbar.title = title
         setSupportActionBar(toolbar)
     }
