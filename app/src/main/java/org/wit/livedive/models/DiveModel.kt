@@ -14,7 +14,8 @@ data class DiveModel(
     var title: String? = "",
     var description: String? = "",
     var image: String? = "",
-    @Embedded var location : Location = Location())
+    @Embedded var location : Location = Location()
+)
     : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
@@ -32,7 +33,6 @@ data class DiveModel(
         parcel.writeString(title)
         parcel.writeString(description)
         parcel.writeString(image)
-
     }
 
     override fun describeContents(): Int {

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 
 import org.jetbrains.anko.AnkoLogger
@@ -39,8 +40,6 @@ class DiveView : BaseView(), AnkoLogger {
             it.setOnMapClickListener { presenter.doSetLocation() }
         } //Location Selector
 
-
-
         binding.chooseImage.setOnClickListener {
             presenter.cacheDive(
                     binding.diveTitle.text.toString(),
@@ -58,12 +57,14 @@ class DiveView : BaseView(), AnkoLogger {
            binding.description.setText(dive.description)
        }
        if (dive != null) {
-           binding.diveImage.setImageBitmap(dive.image?.let { readImageFromPath(this, it) })
+           Glide.with(this).load(dive.image).into(binding.diveImage);
        }
        if (dive != null) {
            if (dive.image != null) {
                binding.chooseImage.setText(R.string.change_dive_image)
            }
+       }
+       if (dive != null) {
            this.showLocation(dive.location)
        }
    }  // Edit Dive

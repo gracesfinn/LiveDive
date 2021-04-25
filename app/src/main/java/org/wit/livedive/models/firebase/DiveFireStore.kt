@@ -35,6 +35,7 @@ class DiveFireStore(val context: Context) : DiveStore, AnkoLogger {
         key?.let {
             dive.fbId = key
             dives.add(dive)
+
             db.child("users").child(userId).child("dives").child(key).setValue(dive)
         }
     }
@@ -63,6 +64,22 @@ class DiveFireStore(val context: Context) : DiveStore, AnkoLogger {
         dives.clear()
     }
 
+    fun fetchDives(divesReady: () -> Unit) {
+        val valueEventListener = object : ValueEventListener {
+            override fun onCancelled(dataSnapshot: DatabaseError) {
+            }
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                dataSnapshot!!.children.mapNotNullTo(dives) { it.getValue<DiveModel>(DiveModel::class.java) }
+                divesReady()
+            }
+        }
+        userId = FirebaseAuth.getInstance().currentUser!!.uid
+        db = FirebaseDatabase.getInstance().reference
+        st = FirebaseStorage.getInstance().reference
+        dives.clear()
+        db.child("users").child(userId).child("dives").addListenerForSingleValueEvent(valueEventListener)
+    }
+
     fun updateImage(dive: DiveModel) {
         if (dive.image != "") {
             val fileName = File(dive.image)
@@ -83,7 +100,7 @@ class DiveFireStore(val context: Context) : DiveStore, AnkoLogger {
                        dive.image = it.toString()
                         dive.fbId?.let { it1 ->
                             db.child("users").child(userId).child("dives").child(
-                                it1
+                                    it1
                             ).setValue(dive)
                         }
                     }
@@ -92,19 +109,5 @@ class DiveFireStore(val context: Context) : DiveStore, AnkoLogger {
         }
     }
 
-    fun fetchDives(divesReady: () -> Unit) {
-        val valueEventListener = object : ValueEventListener {
-            override fun onCancelled(dataSnapshot: DatabaseError) {
-            }
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                dataSnapshot!!.children.mapNotNullTo(dives) { it.getValue<DiveModel>(DiveModel::class.java) }
-                divesReady()
-            }
-        }
-        userId = FirebaseAuth.getInstance().currentUser!!.uid
-        db = FirebaseDatabase.getInstance().reference
-        st = FirebaseStorage.getInstance().reference
-        dives.clear()
-        db.child("users").child(userId).child("dives").addListenerForSingleValueEvent(valueEventListener)
-    }
+
 }

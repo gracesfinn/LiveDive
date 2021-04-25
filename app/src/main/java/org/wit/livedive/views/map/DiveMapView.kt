@@ -1,6 +1,7 @@
 package org.wit.livedive.views.map
 
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 
@@ -42,7 +43,7 @@ class DiveMapView : BaseView(), GoogleMap.OnMarkerClickListener  {
             binding.currentDescription.text = dive.description
         }
         if (dive != null) {
-            binding.currentImage.setImageBitmap(dive.image?.let { readImageFromPath(this, it) })
+            Glide.with(this).load(dive.image).into(binding.currentImage);
         }
     }
 

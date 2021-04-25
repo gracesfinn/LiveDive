@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 import org.wit.livedive.R
 import org.wit.livedive.databinding.CardDiveBinding
@@ -40,11 +41,7 @@ class DiveAdapter constructor(
         fun bind(dive: DiveModel, listener: DiveListener) {
             viewBinding.diveTitleCard.text = dive.title
             viewBinding.descriptionCard.text = dive.description
-            viewBinding.imageIcon.setImageBitmap(dive.image?.let {
-                readImageFromPath(itemView.context,
-                    it
-                )
-            })
+            Glide.with(itemView.context).load(dive.image).into(viewBinding.imageIcon);
             itemView.setOnClickListener{ listener.onDiveClick(dive)}
         }
 
