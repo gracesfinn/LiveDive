@@ -31,9 +31,9 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
     var dive = DiveModel()
     var defaultLocation = Location(19.2869, -81.3674, 15f)
     var edit = false;
-    var locationManualyChanged = false;
     var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
     val locationRequest = createDefaultLocationRequest()
+    var locationManualyChanged = false;
 
 
     init {

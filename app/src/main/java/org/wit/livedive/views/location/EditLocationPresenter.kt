@@ -9,11 +9,13 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.livedive.BasePresenter
 import org.wit.livedive.BaseView
+import org.wit.livedive.models.DiveModel
 import org.wit.livedive.models.Location
 
 class EditLocationPresenter (view: BaseView) : BasePresenter(view) {
 
     var location = Location()
+    var dive = DiveModel()
 
     init {
         location = view.intent.extras?.getParcelable<Location>("location")!!

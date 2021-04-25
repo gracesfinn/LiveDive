@@ -18,15 +18,14 @@ class DiveMapPresenter (view: BaseView) : BasePresenter(view) {
         dives.forEach {
                 val loc = LatLng(it.location.lat, it.location.lng)
                 val options = MarkerOptions().title(it.title).position(loc)
-                map.addMarker(options).tag = it.id
+                map.addMarker(options).tag = it
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
         }
     }
 
     fun doMarkerSelected(marker: Marker) {
-        val tag = marker.tag as Long
+        val dive = marker.tag as DiveModel
         doAsync {
-            val dive = app.dives.findById(tag)
             uiThread {
                 if (dive != null) view?.showDive(dive)
             }
