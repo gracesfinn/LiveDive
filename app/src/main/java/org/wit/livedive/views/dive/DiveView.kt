@@ -49,7 +49,12 @@ class DiveView : BaseView(), AnkoLogger {
 
     }
 
-   override fun showDive(dive: DiveModel?) {
+    override fun showLocation (loc: Location){
+        binding.lat.setText("%.6f".format(loc.lat))
+        binding.lng.setText("%.6f".format(loc.lng))
+    }
+
+    override fun showDive(dive: DiveModel?) {
        if (binding.diveTitle.text.isEmpty()) if (dive != null) {
            binding.diveTitle.setText(dive.title)
        }
@@ -64,15 +69,17 @@ class DiveView : BaseView(), AnkoLogger {
                binding.chooseImage.setText(R.string.change_dive_image)
            }
        }
-       if (dive != null) {
-           this.showLocation(dive.location)
-       }
+        if (dive != null) {
+            binding.mapView.getMapAsync {
+                map = it
+                presenter.doConfigureMap(map)
+                it.setOnMapClickListener { presenter.doSetLocation() }
+            }
+            this.showLocation(dive.location)
+        }
+
    }  // Edit Dive
 
-       override fun showLocation (loc: Location){
-           binding.lat.setText("%.6f".format(loc.lat))
-           binding.lng.setText("%.6f".format(loc.lng))
-       } //
 
 
 

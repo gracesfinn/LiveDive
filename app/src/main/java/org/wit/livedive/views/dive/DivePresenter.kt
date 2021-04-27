@@ -86,10 +86,6 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         dive.description = description
     }
 
-    fun doConfigureMap(m: GoogleMap) {
-        map = m
-        locationUpdate(dive.location)
-    }
 
     fun locationUpdate(location: Location) {
         dive.location = location
@@ -100,6 +96,11 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         map?.addMarker(options)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(dive.location.lat, dive.location.lng), dive.location.zoom))
         view?.showLocation(dive.location)
+    }
+
+    fun doConfigureMap(m: GoogleMap) {
+        map = m
+        locationUpdate(dive.location)
     }
 
     fun doAddOrSave(title: String, description: String) {
