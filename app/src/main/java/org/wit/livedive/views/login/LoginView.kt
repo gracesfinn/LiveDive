@@ -5,17 +5,18 @@ import android.view.View
 import org.jetbrains.anko.toast
 import org.wit.livedive.BaseView
 import org.wit.livedive.databinding.ActivityLoginBinding
+import org.wit.livedive.databinding.UserLoginBinding
 
 
 class LoginView : BaseView() {
 
     lateinit var presenter: LoginPresenter
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: UserLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = UserLoginBinding.inflate(layoutInflater)
         val view = binding.root
         super.initLogin(binding.toolbar)
         setContentView(view)
