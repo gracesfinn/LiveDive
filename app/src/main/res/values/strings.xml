@@ -28,7 +28,7 @@
     <string name="title_activity_login"> Signup/Login to Live Dive</string>
 
 
-    <string name="menu_showMap">Map</string>
+    <string name="menu_showMap">Map of Sites</string>
     <string name="menu_logout">Logout</string>
     <string name="button_login">Login</string>
     <string name="button_register">Register</string>

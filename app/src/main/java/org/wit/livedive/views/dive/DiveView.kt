@@ -43,7 +43,10 @@ class DiveView : BaseView(), AnkoLogger {
         binding.chooseImage.setOnClickListener {
             presenter.cacheDive(
                     binding.diveTitle.text.toString(),
-                    binding.description.text.toString())
+                    binding.description.text.toString(),
+                    binding.dateVisited.dayOfMonth,
+                    binding.dateVisited.month,
+                    binding.dateVisited.year)
             presenter.doSelectImage()
         } //Image Selector
 
@@ -97,7 +100,10 @@ class DiveView : BaseView(), AnkoLogger {
                 } else {
                     presenter.doAddOrSave(
                             binding.diveTitle.text.toString(),
-                            binding.description.text.toString()
+                            binding.description.text.toString(),
+                            binding.dateVisited.dayOfMonth,
+                            binding.dateVisited.month,
+                            binding.dateVisited.year
                     )
                 }
             }

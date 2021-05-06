@@ -1,5 +1,7 @@
 package org.wit.livedive.views.divelist
 
+import android.content.ContentValues
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.*
 import org.wit.livedive.BasePresenter
@@ -32,6 +34,11 @@ class DiveListPresenter (view: BaseView) : BasePresenter(view) {
                 view?.showDives(dives)
             }
         }
+    }
+    fun doShowList() {
+        view!!.intent.removeExtra("favourite")
+        view?.navigateTo(VIEW.LIST)
+        Log.d(ContentValues.TAG, "Back to home")
     }
 
     fun doLogout() {

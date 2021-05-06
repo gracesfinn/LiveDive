@@ -35,7 +35,6 @@ class DiveFireStore(val context: Context) : DiveStore, AnkoLogger {
         key?.let {
             dive.fbId = key
             dives.add(dive)
-
             db.child("users").child(userId).child("dives").child(key).setValue(dive)
         }
     }
@@ -47,6 +46,9 @@ class DiveFireStore(val context: Context) : DiveStore, AnkoLogger {
             foundDive.description = dive.description
             foundDive.image = dive.image
             foundDive.location = dive.location
+            foundDive.dayVisited = dive.dayVisited
+            foundDive.monthVisited = dive.monthVisited
+            foundDive.yearVisited = dive.yearVisited
         }
 
         dive.fbId?.let { db.child("users").child(userId).child("dives").child(it).setValue(dive) }

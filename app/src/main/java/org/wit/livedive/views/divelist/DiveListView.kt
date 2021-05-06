@@ -27,6 +27,21 @@ class DiveListView :  BaseView(), DiveListener {
         setContentView(view)
         super.init(binding.toolbar, false)
 
+        binding.bottomAppBar.replaceMenu(R.menu.bottom_app_bar)
+
+        binding.bottomAppBar.setOnMenuItemClickListener{menuItem ->
+
+            when(menuItem.itemId){
+
+                R.id.item_logout -> presenter.doLogout()
+                R.id.item_map -> presenter.doShowDivesMap()
+                //R.id.item_favourite -> presenter.doShowFavourites()
+               // R.id.item_settings -> presenter.doUpdateUser()
+                R.id.item_home-> presenter.doShowList()
+            }
+            true
+        }
+
 
 
         presenter = initPresenter(DiveListPresenter(this)) as DiveListPresenter
@@ -34,6 +49,10 @@ class DiveListView :  BaseView(), DiveListener {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         presenter.loadDives()
+
+        binding.addNew.setOnClickListener{
+            presenter.doAddDive()
+        }
     }
 
     override fun showDives(dives: List<DiveModel>) {
@@ -46,14 +65,7 @@ class DiveListView :  BaseView(), DiveListener {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
-            R.id.item_add -> presenter.doAddDive()
-            R.id.item_map -> presenter.doShowDivesMap()
-            R.id.item_logout ->presenter.doLogout()
-        }
-        return super.onOptionsItemSelected(item)
-    }
+
 
     override fun onDiveClick(dive: DiveModel) {
         presenter.doEditDive(dive)

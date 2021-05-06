@@ -81,9 +81,17 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         }
     }
 
-    fun cacheDive (title: String, description: String) {
+    fun cacheDive (title: String,
+                   description: String,
+                   dayOfMonth: Int,
+                   month: Int,
+                   year: Int,) {
         dive.title = title;
         dive.description = description
+        dive.dayVisited = dayOfMonth
+        dive.monthVisited = month
+        dive.yearVisited = year
+
     }
 
 
@@ -103,9 +111,18 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         locationUpdate(dive.location)
     }
 
-    fun doAddOrSave(title: String, description: String) {
+    fun doAddOrSave(
+        title: String,
+        description: String,
+        dayOfMonth: Int,
+        month: Int,
+        year: Int
+    ) {
         dive.title = title
         dive.description = description
+        dive.dayVisited = dayOfMonth
+        dive.monthVisited = month
+        dive.yearVisited = year
         doAsync {
             if (edit) {
                 app.dives.update(dive)

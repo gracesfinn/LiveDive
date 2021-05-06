@@ -9,7 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:fitsSystemWindows="true"
         app:elevation="0dip"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -18,7 +18,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titleTextColor="@color/colorPrimary" />
+            app:titleTextColor="@color/colorAccent" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical"
+        android:textColor="@color/colorAccent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorAccent"
+        android:src="@drawable/ic_add_icon"
+        app:layout_anchor="@id/bottomAppBar" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:layout_gravity="bottom"
+        />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
