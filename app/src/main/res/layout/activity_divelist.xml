@@ -43,6 +43,7 @@
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorAccent"
         android:background="@color/colorAccent"
         android:layout_gravity="bottom"
         />

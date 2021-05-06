@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">LiveDive</string>
     <string name="hint_diveTitle">Dive Title</string>
-    <string name="hint_diveDescription">Description</string>
+    <string name="hint_diveDescription">Entry</string>
+    <string name="hint_diveDepth">Max Depth</string>
     <string name="button_addDive">Add Dive</string>
     <string name="menu_addDive">Add</string>
     <string name="menu_cancelDive">Cancel</string>
