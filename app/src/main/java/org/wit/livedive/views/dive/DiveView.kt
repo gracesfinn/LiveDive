@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 
@@ -106,6 +107,7 @@ class DiveView : BaseView(), AnkoLogger {
                             binding.dateVisited.year
                     )
                 }
+
             }
             R.id.item_delete -> {
                 presenter.doDelete()
@@ -114,6 +116,7 @@ class DiveView : BaseView(), AnkoLogger {
                 presenter.doCancel()
             }
         }
+
         return super.onOptionsItemSelected(item)
     } //When Buttons are pressed
 
