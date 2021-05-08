@@ -23,6 +23,7 @@ class DiveListPresenter (view: BaseView) : BasePresenter(view) {
         view?.navigateTo(VIEW.DIVE, 0, "dive_edit", dive)
     }
 
+
     fun doShowDivesMap() {
         view?.navigateTo(VIEW.MAPS)
     }
@@ -35,6 +36,7 @@ class DiveListPresenter (view: BaseView) : BasePresenter(view) {
             }
         }
     }
+
     fun doShowList() {
         view!!.intent.removeExtra("favourite")
         view?.navigateTo(VIEW.LIST)

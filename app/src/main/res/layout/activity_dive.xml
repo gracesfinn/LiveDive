@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/appBarLayout"
-            android:layout_marginTop="-17dp"
+
             android:fillViewport="true">
 
             <LinearLayout
@@ -46,19 +46,28 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="200dp">
+                    android:layout_height="270dp">
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="190dp">
+                        android:layout_height="343dp">
+
+                        <TextView
+                            android:id="@+id/heading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Dive Details"
+                            android:textSize="20sp"
+                            tools:layout_editor_absoluteX="8dp"
+                            tools:layout_editor_absoluteY="16dp" />
 
                         <EditText
                             android:id="@+id/diveTitle"
                             android:layout_width="248dp"
                             android:layout_height="57dp"
                             android:layout_marginStart="8dp"
-
                             android:autofillHints=""
                             android:hint="@string/hint_diveTitle"
                             android:inputType="text"
@@ -68,7 +77,7 @@
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="14sp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@+id/heading" />
 
                         <EditText
                             android:id="@+id/description"
@@ -87,7 +96,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/diveTitle" />
 
                         <EditText
-                            android:id="@+id/editTextNumber"
+                            android:id="@+id/maxDepth"
                             android:layout_width="249dp"
                             android:layout_height="62dp"
                             android:layout_marginStart="8dp"
@@ -134,48 +143,196 @@
                             android:layout_width="90dp"
                             android:layout_height="24dp"
                             android:layout_marginStart="32dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="25dp"
                             android:text="Coordinates"
                             android:textAlignment="center"
                             app:layout_constraintStart_toEndOf="@+id/diveTitle"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="@id/heading" />
+
+
+
+                        <EditText
+                            android:id="@+id/diveTime"
+                            android:layout_width="104dp"
+                            android:layout_height="55dp"
+                            android:layout_marginStart="288dp"
+                            android:layout_marginTop="12dp"
+                            android:ems="10"
+                            android:hint="Mins"
+                            android:inputType="number"
+                            android:padding="8dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/description" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
-                <TextView
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Dive Site"
-                    android:textSize="20sp" />
+                    android:layout_height="250dp">
 
-                <com.google.android.gms.maps.MapView
-                    android:id="@+id/mapView"
-                    android:layout_width="394dp"
-                    android:layout_height="162dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Dive Site"
+                            android:textSize="20sp"
+                            tools:layout_editor_absoluteX="8dp"
+                            tools:layout_editor_absoluteY="16dp" />
+
+                        <com.google.android.gms.maps.MapView
+                            android:id="@+id/mapView"
+                            android:layout_width="394dp"
+                            android:layout_height="162dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="28dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.666"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Date Visited"
-                    android:textSize="20sp" />
+                    android:layout_height="250dp">
 
-                <DatePicker
-                    android:id="@+id/dateVisited"
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:calendarViewShown="false"
-                    android:datePickerMode="spinner" />
+                    android:layout_height="250dp">
+
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Date Visited"
+                        android:textSize="20sp" />
+
+                    <DatePicker
+                        android:id="@+id/dateVisited"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:calendarViewShown="false"
+                        android:datePickerMode="spinner"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="0dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp">
+
+                        <TextView
+                            android:id="@+id/equipment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Equipment"
+                            android:textSize="20sp" />
+
+                        <EditText
+                            android:id="@+id/weight"
+                            android:layout_width="249dp"
+                            android:layout_height="62dp"
+                            android:layout_marginStart="8dp"
+                            android:ems="10"
+                            android:hint="@string/hint_weight"
+                            android:inputType="number"
+                            android:padding="8dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toEndOf="@+id/equipment"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/equipment" />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxWetSuit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="24dp"
+                            android:text="Wetsuit"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.941"
+                            app:layout_constraintStart_toEndOf="@+id/weight"
+                            app:layout_constraintTop_toBottomOf="@+id/equipment" />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxAir"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="96dp"
+                            android:layout_marginTop="20dp"
+                            android:text="Air"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/weight" />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxNitrox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:text="Nitrox"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.548"
+                            app:layout_constraintStart_toEndOf="@+id/checkBoxAir"
+                            app:layout_constraintTop_toBottomOf="@+id/weight" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp">
+
+
+                    <TextView
+                        android:id="@+id/weather"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Conditions"
+                        android:textSize="20sp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp">
 
 
                 <Button
@@ -194,21 +351,24 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.062"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/dateVisited" />
+                    />
 
 
-                <ImageView
-                    android:id="@+id/diveImage"
-                    android:layout_width="400dp"
-                    android:layout_height="150dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="68dp"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/chooseImage"
-                    app:srcCompat="@mipmap/ic_launcher" />
+                    <ImageView
+                        android:id="@+id/diveImage"
+                        android:layout_width="400dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.6"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/chooseImage"
+                        app:srcCompat="@mipmap/ic_launcher" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
 
             </LinearLayout>

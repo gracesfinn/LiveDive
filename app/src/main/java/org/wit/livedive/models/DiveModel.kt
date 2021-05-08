@@ -17,6 +17,12 @@ data class DiveModel(
     var dayVisited: Int= 0,
     var monthVisited: Int= 0,
     var yearVisited: Int= 0,
+    var maxDepth: String? = "",
+    var mins: String? = "",
+    var weight: String? = "",
+    var wetsuit: Boolean = false,
+    var air: Boolean = false,
+    var nitrox: Boolean = false,
     @Embedded var location : Location = Location()
 )
     : Parcelable {
@@ -29,6 +35,8 @@ data class DiveModel(
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
+        parcel.readString(),
+        parcel.readString(),
 
     ) {
     }
@@ -42,6 +50,8 @@ data class DiveModel(
         parcel.writeInt(dayVisited)
         parcel.writeInt(monthVisited)
         parcel.writeInt(yearVisited)
+        parcel.writeString(maxDepth)
+        parcel.writeString(mins)
     }
 
     override fun describeContents(): Int {

@@ -41,13 +41,33 @@ class DiveView : BaseView(), AnkoLogger {
             it.setOnMapClickListener { presenter.doSetLocation() }
         } //Location Selector
 
+
+        binding.checkBoxWetSuit.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked)
+                presenter.doCheckWetsuit(true)
+        }
+
+        binding.checkBoxAir.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked)
+                presenter.doCheckAir(true)
+        }
+
+        binding.checkBoxNitrox.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked)
+                presenter.doCheckNitrox(true)
+        }
+
+
+
         binding.chooseImage.setOnClickListener {
             presenter.cacheDive(
                     binding.diveTitle.text.toString(),
                     binding.description.text.toString(),
                     binding.dateVisited.dayOfMonth,
                     binding.dateVisited.month,
-                    binding.dateVisited.year)
+                    binding.dateVisited.year,
+                    binding.maxDepth.text.toString()
+            )
             presenter.doSelectImage()
         } //Image Selector
 
@@ -104,10 +124,12 @@ class DiveView : BaseView(), AnkoLogger {
                             binding.description.text.toString(),
                             binding.dateVisited.dayOfMonth,
                             binding.dateVisited.month,
-                            binding.dateVisited.year
+                            binding.dateVisited.year,
+                            binding.maxDepth.text.toString(),
+                            binding.diveTime.text.toString(),
+                            binding.weight.text.toString()
                     )
                 }
-
             }
             R.id.item_delete -> {
                 presenter.doDelete()

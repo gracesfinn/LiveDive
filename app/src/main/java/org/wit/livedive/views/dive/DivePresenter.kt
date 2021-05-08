@@ -85,12 +85,14 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
                    description: String,
                    dayOfMonth: Int,
                    month: Int,
-                   year: Int,) {
+                   year: Int,
+                    maxDepth:String) {
         dive.title = title;
         dive.description = description
         dive.dayVisited = dayOfMonth
         dive.monthVisited = month
         dive.yearVisited = year
+        dive.maxDepth = maxDepth
 
     }
 
@@ -116,13 +118,19 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         description: String,
         dayOfMonth: Int,
         month: Int,
-        year: Int
+        year: Int,
+        maxDepth: String,
+        mins: String,
+        weight: String
     ) {
         dive.title = title
         dive.description = description
         dive.dayVisited = dayOfMonth
         dive.monthVisited = month
         dive.yearVisited = year
+        dive.maxDepth = maxDepth
+        dive.mins= mins
+        dive.weight = weight
         doAsync {
             if (edit) {
                 app.dives.update(dive)
@@ -156,6 +164,21 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         locationManualyChanged = true;
             view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(dive.location.lat, dive.location.lng, dive.location.zoom))
 
+    }
+
+    fun doCheckWetsuit(wetsuit:Boolean)
+    {
+        dive.wetsuit = wetsuit
+    }
+
+    fun doCheckAir(air:Boolean)
+    {
+        dive.air = air
+    }
+
+    fun doCheckNitrox(nitrox:Boolean)
+    {
+        dive.nitrox = nitrox
     }
 
     override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
