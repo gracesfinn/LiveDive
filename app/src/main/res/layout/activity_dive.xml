@@ -46,6 +46,48 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
+                    android:layout_height="250dp">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp">
+
+
+                        <Button
+                            android:id="@+id/chooseImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:background="@drawable/custom_button"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/button_addImage"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.062"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <ImageView
+                            android:id="@+id/diveImage"
+                            android:layout_width="0dp"
+                            android:layout_height="150dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/chooseImage"
+                            app:srcCompat="@mipmap/ic_launcher" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="270dp">
 
 
@@ -148,7 +190,6 @@
                             android:textAlignment="center"
                             app:layout_constraintStart_toEndOf="@+id/diveTitle"
                             app:layout_constraintTop_toTopOf="@id/heading" />
-
 
 
                         <EditText
@@ -315,60 +356,185 @@
 
 
                     <TextView
-                        android:id="@+id/weather"
+                        android:id="@+id/weatherHeading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Conditions"
                         android:textSize="20sp" />
 
+                    <EditText
+                        android:id="@+id/weather"
+                        android:layout_width="378dp"
+                        android:layout_height="58dp"
+                        android:layout_marginStart="8dp"
+                        android:ems="10"
+                        android:hint="@string/hint_weather"
+                        android:inputType="text"
+                        android:padding="8dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@+id/weatherHeading"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/weatherHeading" />
+
+                    <EditText
+                        android:id="@+id/ocean"
+                        android:layout_width="378dp"
+                        android:layout_height="58dp"
+                        android:layout_marginStart="8dp"
+                        android:ems="10"
+                        android:hint="@string/hint_ocean"
+                        android:inputType="text"
+                        android:padding="8dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@+id/weather"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/weather" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="250dp">
+                    android:layout_height="320dp">
 
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="320dp">
+
+                        <TextView
+                            android:id="@+id/wildlifeHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Wildlife"
+                            android:textSize="20sp" />
+
+                        <EditText
+                            android:id="@+id/wildlife"
+                            android:layout_width="378dp"
+                            android:layout_height="58dp"
+                            android:layout_marginStart="8dp"
+                            android:ems="10"
+                            android:hint="@string/hint_wildlife"
+                            android:inputType="text"
+                            android:padding="8dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/wildlifeHeading" />
 
 
-                <Button
-                    android:id="@+id/chooseImage"
-                    android:layout_width="391dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginEnd="1dp"
-                    android:background="@color/colorAccent"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:text="@string/button_addImage"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.062"
-                    app:layout_constraintStart_toStartOf="parent"
-                    />
+                        <Button
+                            android:id="@+id/chooseImageWildLife"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:background="@drawable/custom_button"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/button_addWildlifeImage"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/wildlife" />
 
 
-                    <ImageView
-                        android:id="@+id/diveImage"
-                        android:layout_width="400dp"
-                        android:layout_height="150dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.6"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/chooseImage"
-                        app:srcCompat="@mipmap/ic_launcher" />
+                        <ImageView
+                            android:id="@+id/wildlifeImage"
+                            android:layout_width="0dp"
+                            android:layout_height="150dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/chooseImageWildLife"
+                            app:srcCompat="@mipmap/ic_launcher" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="320dp">
+
+                        <TextView
+                            android:id="@+id/POIHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Points of Interest"
+                            android:textSize="20sp" />
+
+                        <EditText
+                            android:id="@+id/pointOfInterest"
+                            android:layout_width="378dp"
+                            android:layout_height="58dp"
+                            android:layout_marginStart="8dp"
+                            android:ems="10"
+                            android:hint="@string/hint_POI"
+                            android:inputType="text"
+                            android:padding="8dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/POIHeading" />
+
+
+                        <Button
+                            android:id="@+id/chooseImagePOI"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:background="@drawable/custom_button"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/button_addPOIImage"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/pointOfInterest" />
+
+
+                        <ImageView
+                            android:id="@+id/POIImage"
+                            android:layout_width="0dp"
+                            android:layout_height="150dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/chooseImagePOI"
+                            app:srcCompat="@mipmap/ic_launcher" />
+
+                        <EditText
+                            android:id="@+id/additionalNotes"
+                            android:layout_width="378dp"
+                            android:layout_height="58dp"
+                            android:layout_marginStart="8dp"
+                            android:ems="10"
+                            android:hint="@string/hint_addionalNotes"
+                            android:inputType="text"
+                            android:padding="8dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/POIImage" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+
 
 
             </LinearLayout>

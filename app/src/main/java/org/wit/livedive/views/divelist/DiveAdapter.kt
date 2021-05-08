@@ -42,17 +42,48 @@ class DiveAdapter constructor(
         fun bind(dive: DiveModel, listener: DiveListener) {
             viewBinding.diveTitleCard.text = dive.title
             viewBinding.descriptionCard.text = dive.description
-            val message = "Date Visited: ${dive.dayVisited}/${dive.monthVisited + 1}/${dive.yearVisited} "
-            viewBinding.dateCard.text = message
+            val dateMessage = "Date Visited: ${dive.dayVisited}/${dive.monthVisited + 1}/${dive.yearVisited} "
+            viewBinding.dateCard.text = dateMessage
+
+            val timeMessage = "${dive.mins} mins"
+            viewBinding.timeCard.text = timeMessage
+
+            val depthMessage = "${dive.maxDepth} ft"
+            viewBinding.depthCard.text = depthMessage
+
+            viewBinding.weatherCard.text = dive.weather
+            viewBinding.oceanCard.text = dive.ocean
+            viewBinding.wildlifeCard.text = dive.wildlife
+
+            var wetsuitString =
+                if(dive.wetsuit)
+                    "Wore Wetsuit"
+            else
+                "No Wetsuit"
+            viewBinding.wetsuitCard.text = "${wetsuitString}"
+
+            var airString =
+                if(dive.air)
+                    "Air Tank"
+                else
+                    "-----"
+            viewBinding.airCard.text = "${airString}"
+
+            var nitroxString =
+                if(dive.nitrox)
+                    "Nitrox Tank"
+                else
+                    "-----"
+            viewBinding.nitroxCard.text = "${nitroxString}"
+
+
             Glide.with(itemView.context).load(dive.image).into(viewBinding.imageIcon);
+            Glide.with(itemView.context).load(dive.wildlifeImage).into(viewBinding.wildlifeImageCard);
+            Glide.with(itemView.context).load(dive.poiImage).into(viewBinding.poiImageCard);
             itemView.setOnClickListener{ listener.onDiveClick(dive)}
         }
 
     }
-
-
-
-
 
 
 }

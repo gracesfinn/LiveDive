@@ -5,9 +5,16 @@
     <string name="hint_diveDescription">Entry</string>
     <string name="hint_diveDepth">Max Depth</string>
     <string name="hint_weight">Weight(lbs)</string>
+    <string name="hint_weather">Weather</string>
+    <string name="hint_ocean">Ocean</string>
+    <string name="hint_wildlife">Wildlife</string>
+    <string name="hint_POI">Points of Interest</string>
+    <string name="hint_addionalNotes">Additional Notes</string>
 
     <string name="button_addDive">Add Dive</string>
-    <string name="button_addImage"> Add Image </string>
+    <string name="button_addImage"> Add Cover Image </string>
+    <string name="button_addWildlifeImage"> Add Wildlife Image </string>
+    <string name="button_addPOIImage"> Add Image </string>
     <string name="button_location">Set Location</string>
     <string name="button_login">Login</string>
     <string name="button_register">Register</string>
@@ -32,6 +39,8 @@
 
     <string name="select_dive_image">Select Dive Image</string>
     <string name="change_dive_image">Change Dive Image</string>
+    <string name="change_wildlife_image">Change Wildlife Image</string>
+    <string name="change_POI_image">Change POI Image</string>
 
 
     <string name="enter_dive_title"> Please enter a Dive Title </string>

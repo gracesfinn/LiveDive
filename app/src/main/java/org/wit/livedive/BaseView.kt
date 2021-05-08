@@ -15,7 +15,9 @@ import org.wit.livedive.views.login.LoginView
 import org.wit.livedive.views.map.DiveMapView
 
 val IMAGE_REQUEST = 1
-val LOCATION_REQUEST = 2
+val LOCATION_REQUEST = 4
+val IMAGE_WILDLIFE_REQUEST = 2
+val IMAGE_POI_REQUEST = 3
 
 enum class VIEW {
     LOCATION, DIVE, MAPS, LIST, LOGIN

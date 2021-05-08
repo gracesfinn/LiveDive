@@ -2,8 +2,10 @@ package org.wit.livedive.views.dive
 
 import android.content.Intent
 import android.os.Bundle
+import android.transition.Explode
 import android.view.Menu
 import android.view.MenuItem
+import android.view.Window
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
@@ -27,6 +29,14 @@ class DiveView : BaseView(), AnkoLogger {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        with(window) {
+            requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
+            // set set the transition to be shown when the user enters this activity
+            enterTransition = Explode()
+            // set the transition to be shown when the user leaves this activity
+            exitTransition = Explode()
+        }
 
         binding = ActivityDiveBinding.inflate(layoutInflater)
         val view = binding.root
@@ -66,10 +76,57 @@ class DiveView : BaseView(), AnkoLogger {
                     binding.dateVisited.dayOfMonth,
                     binding.dateVisited.month,
                     binding.dateVisited.year,
-                    binding.maxDepth.text.toString()
+                    binding.maxDepth.text.toString(),
+                    binding.diveTime.text.toString(),
+                    binding.weight.text.toString(),
+                    binding.weather.text.toString(),
+                    binding.ocean.text.toString(),
+                    binding.wildlife.text.toString(),
+                    binding.pointOfInterest.text.toString(),
+                    binding.additionalNotes.text.toString()
             )
             presenter.doSelectImage()
         } //Image Selector
+
+        binding.chooseImageWildLife.setOnClickListener {
+            presenter.cacheDive(
+                binding.diveTitle.text.toString(),
+                binding.description.text.toString(),
+                binding.dateVisited.dayOfMonth,
+                binding.dateVisited.month,
+                binding.dateVisited.year,
+                binding.maxDepth.text.toString(),
+                binding.diveTime.text.toString(),
+                binding.weight.text.toString(),
+                binding.weather.text.toString(),
+                binding.ocean.text.toString(),
+                binding.wildlife.text.toString(),
+                binding.pointOfInterest.text.toString(),
+                binding.additionalNotes.text.toString()
+
+            )
+            presenter.doSelectImageWildlife()
+        } //Wildlife Image Selector
+
+        binding.chooseImagePOI.setOnClickListener {
+            presenter.cacheDive(
+                binding.diveTitle.text.toString(),
+                binding.description.text.toString(),
+                binding.dateVisited.dayOfMonth,
+                binding.dateVisited.month,
+                binding.dateVisited.year,
+                binding.maxDepth.text.toString(),
+                binding.diveTime.text.toString(),
+                binding.weight.text.toString(),
+                binding.weather.text.toString(),
+                binding.ocean.text.toString(),
+                binding.wildlife.text.toString(),
+                binding.pointOfInterest.text.toString(),
+                binding.additionalNotes.text.toString()
+
+            )
+            presenter.doSelectImagePOI()
+        } //Wildlife Image Selector
 
     }
 
@@ -85,14 +142,37 @@ class DiveView : BaseView(), AnkoLogger {
        if (binding.description.text.isEmpty()) if (dive != null) {
            binding.description.setText(dive.description)
        }
+        binding.checkBoxWetSuit.isChecked
+        binding.checkBoxAir.isChecked
+        binding.checkBoxNitrox.isChecked
+
+
+
+
        if (dive != null) {
            Glide.with(this).load(dive.image).into(binding.diveImage);
        }
+        if (dive != null) {
+            Glide.with(this).load(dive.wildlifeImage).into(binding.wildlifeImage);
+        }
+        if (dive != null) {
+            Glide.with(this).load(dive.poiImage).into(binding.POIImage);
+        }
        if (dive != null) {
            if (dive.image != null) {
                binding.chooseImage.setText(R.string.change_dive_image)
            }
        }
+        if(dive != null){
+            if (dive.wildlifeImage != null){
+                binding.chooseImageWildLife.setText(R.string.change_wildlife_image)
+            }
+        }
+        if(dive != null){
+            if (dive.poiImage != null){
+                binding.chooseImagePOI.setText(R.string.change_POI_image)
+            }
+        }
         if (dive != null) {
             binding.mapView.getMapAsync {
                 map = it
@@ -127,7 +207,12 @@ class DiveView : BaseView(), AnkoLogger {
                             binding.dateVisited.year,
                             binding.maxDepth.text.toString(),
                             binding.diveTime.text.toString(),
-                            binding.weight.text.toString()
+                            binding.weight.text.toString(),
+                            binding.weather.text.toString(),
+                            binding.ocean.text.toString(),
+                            binding.wildlife.text.toString(),
+                            binding.pointOfInterest.text.toString(),
+                            binding.additionalNotes.text.toString()
                     )
                 }
             }

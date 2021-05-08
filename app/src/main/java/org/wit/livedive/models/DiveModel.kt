@@ -1,8 +1,10 @@
 package org.wit.livedive.models
 
 
+import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.RequiresApi
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -23,9 +25,17 @@ data class DiveModel(
     var wetsuit: Boolean = false,
     var air: Boolean = false,
     var nitrox: Boolean = false,
+    var weather: String?= "",
+    var ocean: String ?= "",
+    var wildlifeImage: String ?= "",
+    var wildlife: String ?= "",
+    var poiImage : String ?= "",
+    var poi : String ?= "",
+    var additionalNotes : String ?= "",
     @Embedded var location : Location = Location()
 )
     : Parcelable {
+    @RequiresApi(Build.VERSION_CODES.Q)
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
         parcel.readString(),
@@ -37,10 +47,21 @@ data class DiveModel(
         parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
-
+        parcel.readString(),
+        parcel.readBoolean(),
+        parcel.readBoolean(),
+        parcel.readBoolean(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
     ) {
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(id)
         parcel.writeString(fbId)
@@ -52,6 +73,16 @@ data class DiveModel(
         parcel.writeInt(yearVisited)
         parcel.writeString(maxDepth)
         parcel.writeString(mins)
+        parcel.writeBoolean(wetsuit)
+        parcel.writeBoolean(air)
+        parcel.writeBoolean(nitrox)
+        parcel.writeString(weather)
+        parcel.writeString(ocean)
+        parcel.writeString(wildlifeImage)
+        parcel.writeString(wildlife)
+        parcel.writeString(poiImage)
+        parcel.writeString(poi)
+        parcel.writeString(additionalNotes)
     }
 
     override fun describeContents(): Int {
@@ -59,8 +90,9 @@ data class DiveModel(
     }
 
     companion object CREATOR : Parcelable.Creator<DiveModel> {
+        @RequiresApi(Build.VERSION_CODES.Q)
         override fun createFromParcel(parcel: Parcel): DiveModel {
-            return DiveModel(parcel)
+            return  DiveModel(parcel)
         }
 
         override fun newArray(size: Int): Array<DiveModel?> {

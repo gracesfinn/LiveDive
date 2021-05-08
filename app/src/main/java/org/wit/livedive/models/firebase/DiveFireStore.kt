@@ -49,10 +49,29 @@ class DiveFireStore(val context: Context) : DiveStore, AnkoLogger {
             foundDive.dayVisited = dive.dayVisited
             foundDive.monthVisited = dive.monthVisited
             foundDive.yearVisited = dive.yearVisited
+            foundDive.maxDepth = dive.maxDepth
+            foundDive.mins = dive.mins
+            foundDive.weight = dive.weight
+            foundDive.wetsuit = dive.wetsuit
+            foundDive.air = dive.air
+            foundDive.nitrox = dive.nitrox
+            foundDive.weather = dive.weather
+            foundDive.ocean = dive.ocean
+            foundDive.wildlifeImage = dive.wildlifeImage
+            foundDive.wildlife = dive.wildlife
+            foundDive.poi = dive.poi
+            foundDive.poiImage = dive.poiImage
+            foundDive.additionalNotes = dive.additionalNotes
         }
 
         dive.fbId?.let { db.child("users").child(userId).child("dives").child(it).setValue(dive) }
         if ((dive.image?.length)!! > 0 && (dive.image?.get(0) != 'h')) {
+            updateImage(dive)
+        }
+        else if ((dive.wildlifeImage?.length)!! > 0 && (dive.wildlifeImage?.get(0) != 'h')) {
+            updateImage(dive)
+        }
+        else if ((dive.poiImage?.length)!! > 0 && (dive.poiImage?.get(0) != 'h')) {
             updateImage(dive)
         }
     }
@@ -103,6 +122,58 @@ class DiveFireStore(val context: Context) : DiveStore, AnkoLogger {
                         dive.fbId?.let { it1 ->
                             db.child("users").child(userId).child("dives").child(
                                     it1
+                            ).setValue(dive)
+                        }
+                    }
+                }
+            }
+        }
+        if (dive.wildlifeImage != "") {
+            val fileName = File(dive.wildlifeImage)
+            val imageName = fileName.getName()
+
+            var imageRefWildlife = st.child(userId + '/' + imageName)
+            val baos = ByteArrayOutputStream()
+            val bitmap = dive.wildlifeImage?.let { readImageFromPath(context, it) }
+
+            bitmap?.let {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+                val uploadTask = imageRefWildlife.putBytes(data)
+                uploadTask.addOnFailureListener {
+                    println(it.message)
+                }.addOnSuccessListener { taskSnapshot ->
+                    taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
+                        dive.wildlifeImage = it.toString()
+                        dive.fbId?.let { it1 ->
+                            db.child("users").child(userId).child("dives").child(
+                                it1
+                            ).setValue(dive)
+                        }
+                    }
+                }
+            }
+        }
+        if (dive.poiImage != "") {
+            val fileName = File(dive.poiImage)
+            val imageName = fileName.getName()
+
+            var imageRefPOI = st.child(userId + '/' + imageName)
+            val baos = ByteArrayOutputStream()
+            val bitmap = dive.poiImage?.let { readImageFromPath(context, it) }
+
+            bitmap?.let {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+                val uploadTask = imageRefPOI.putBytes(data)
+                uploadTask.addOnFailureListener {
+                    println(it.message)
+                }.addOnSuccessListener { taskSnapshot ->
+                    taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
+                        dive.poiImage = it.toString()
+                        dive.fbId?.let { it1 ->
+                            db.child("users").child(userId).child("dives").child(
+                                it1
                             ).setValue(dive)
                         }
                     }

@@ -12,9 +12,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import org.wit.livedive.BasePresenter
-import org.wit.livedive.BaseView
-import org.wit.livedive.VIEW
+import org.wit.livedive.*
 import org.wit.livedive.helpers.checkLocationPermissions
 import org.wit.livedive.helpers.createDefaultLocationRequest
 import org.wit.livedive.helpers.isPermissionGranted
@@ -25,8 +23,7 @@ import org.wit.livedive.models.Location
 
 class DivePresenter(view: BaseView) : BasePresenter(view) {
 
-    val IMAGE_REQUEST = 1
-    val LOCATION_REQUEST = 2
+
     var map: GoogleMap? = null
     var dive = DiveModel()
     var defaultLocation = Location(19.2869, -81.3674, 15f)
@@ -86,14 +83,27 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
                    dayOfMonth: Int,
                    month: Int,
                    year: Int,
-                    maxDepth:String) {
+                   maxDepth: String,
+                   mins: String,
+                   weight: String,
+                   weather: String,
+                   ocean: String,
+                   wildlife: String,
+                   POI : String,
+                   additionalNotes : String) {
         dive.title = title;
         dive.description = description
         dive.dayVisited = dayOfMonth
         dive.monthVisited = month
         dive.yearVisited = year
         dive.maxDepth = maxDepth
-
+        dive.mins= mins
+        dive.weight = weight
+        dive.weather = weather
+        dive.ocean = ocean
+        dive.wildlife = wildlife
+        dive.poi = POI
+        dive.additionalNotes = additionalNotes
     }
 
 
@@ -121,7 +131,12 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         year: Int,
         maxDepth: String,
         mins: String,
-        weight: String
+        weight: String,
+        weather: String,
+        ocean: String,
+        wildlife: String,
+        POI : String,
+        additionalNotes : String
     ) {
         dive.title = title
         dive.description = description
@@ -131,6 +146,11 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         dive.maxDepth = maxDepth
         dive.mins= mins
         dive.weight = weight
+        dive.weather = weather
+        dive.ocean = ocean
+        dive.wildlife = wildlife
+        dive.poi = POI
+        dive.additionalNotes = additionalNotes
         doAsync {
             if (edit) {
                 app.dives.update(dive)
@@ -160,6 +180,14 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         showImagePicker(view!!, IMAGE_REQUEST)
     }
 
+    fun doSelectImageWildlife(){
+        showImagePicker(view!!, IMAGE_WILDLIFE_REQUEST)
+    }
+
+    fun doSelectImagePOI(){
+        showImagePicker(view!!, IMAGE_POI_REQUEST)
+    }
+
     fun doSetLocation() {
         locationManualyChanged = true;
             view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(dive.location.lat, dive.location.lng, dive.location.zoom))
@@ -186,6 +214,18 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
             IMAGE_REQUEST -> {
                 if (data != null) {
                     dive.image = data.getData().toString()
+                    view?.showDive(dive)
+                }
+            }
+            IMAGE_WILDLIFE_REQUEST -> {
+                if (data != null){
+                    dive.wildlifeImage = data.getData().toString()
+                    view?.showDive(dive)
+                }
+            }
+            IMAGE_POI_REQUEST -> {
+                if (data != null){
+                    dive.poiImage = data.getData().toString()
                     view?.showDive(dive)
                 }
             }
