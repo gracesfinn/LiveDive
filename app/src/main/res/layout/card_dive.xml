@@ -6,9 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    tools:ignore="MissingConstraints">
+    tools:ignore="MissingConstraints"
+    >
 
     <LinearLayout
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -92,9 +94,11 @@
             android:background="?android:attr/listDivider" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id ="@+id/expandableLayout"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/DiveHeading"
@@ -354,6 +358,16 @@
             android:layout_height="50dp"
             android:layout_weight="1">
 
+            <Button
+                android:id="@+id/expandBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_button"
+                android:text="@string/button_expand"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="1dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

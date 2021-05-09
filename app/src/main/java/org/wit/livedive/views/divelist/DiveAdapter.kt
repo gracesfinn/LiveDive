@@ -1,5 +1,7 @@
 package org.wit.livedive.activities
 
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,6 +77,19 @@ class DiveAdapter constructor(
                 else
                     "-----"
             viewBinding.nitroxCard.text = "${nitroxString}"
+
+            viewBinding.expandBtn.setOnClickListener {
+                if (viewBinding.expandableLayout.visibility == View.GONE) {
+                    TransitionManager.beginDelayedTransition(viewBinding.cardView, AutoTransition())
+                    viewBinding.expandableLayout.visibility = View.VISIBLE
+                    viewBinding.expandBtn.text = "COLLAPSE"
+                } else{
+                    TransitionManager.beginDelayedTransition(viewBinding.cardView, AutoTransition())
+                    viewBinding.expandableLayout.visibility = View.GONE
+                    viewBinding.expandBtn.text = "EXPAND"
+                }
+
+            }
 
 
             Glide.with(itemView.context).load(dive.image).into(viewBinding.imageIcon);

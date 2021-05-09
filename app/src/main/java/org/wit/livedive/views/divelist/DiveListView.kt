@@ -53,6 +53,8 @@ class DiveListView :  BaseView(), DiveListener {
         binding.addNew.setOnClickListener{
             presenter.doAddDive()
         }
+
+
     }
 
     override fun showDives(dives: List<DiveModel>) {
