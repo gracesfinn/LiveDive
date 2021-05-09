@@ -19,6 +19,13 @@
     <string name="button_login">Login</string>
     <string name="button_register">Register</string>
     <string name="button_expand">Expand</string>
+    <string name="button_details">Dive Details</string>
+    <string name="button_siteLocation">Dive Location</string>
+    <string name="button_diveDate">Date of Dive</string>
+    <string name="button_equipment">Dive Equipment</string>
+    <string name="button_conditions">Dive Conditions</string>
+    <string name="button_wildlife">Marine Life</string>
+
 
     <string name="menu_showMap">Map of Sites</string>
     <string name="menu_logout">Logout</string>
@@ -44,7 +51,7 @@
     <string name="change_POI_image">Change POI Image</string>
 
 
-    <string name="enter_dive_title"> Please enter a Dive Title </string>
+    <string name="enter_dive_title"> Please Enter Name of Dive Site </string>
     <string name="save_dive"> Save Dive </string>
 
 

@@ -42,7 +42,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/cardView">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -59,16 +60,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"
+                            android:layout_marginTop="16dp"
                             android:background="@drawable/custom_button"
-                            android:paddingTop="20dp"
-                            android:paddingBottom="10dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+                            android:stateListAnimator="@null"
                             android:text="@string/button_addImage"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.062"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:layout_editor_absoluteX="16dp" />
 
 
                         <ImageView
@@ -81,35 +82,169 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/chooseImage"
-                            app:srcCompat="@mipmap/ic_launcher" />
+                            app:srcCompat="@drawable/ic_baseline_camera_24" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+
                     android:layout_width="match_parent"
-                    android:layout_height="270dp">
+                    android:layout_height="70dp">
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="343dp">
+                        android:layout_height="70dp">
 
-                        <TextView
-                            android:id="@+id/heading"
+                        <Button
+                            android:id="@+id/siteLocationBtn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Dive Details"
-                            android:textSize="20sp"
-                            tools:layout_editor_absoluteX="8dp"
-                            tools:layout_editor_absoluteY="16dp" />
+                            android:layout_margin="16dp"
+                            android:background="@drawable/custom_button"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/button_siteLocation"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.062"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/mapCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:visibility="gone">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp">
+
+                        <com.google.android.gms.maps.MapView
+                            android:id="@+id/mapView"
+                            android:layout_width="385dp"
+                            android:layout_height="200dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="28dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.666"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp">
+
+                        <Button
+                            android:id="@+id/dateBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:background="@drawable/custom_button"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/button_diveDate"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.062"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/dateCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:visibility="gone">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp">
+
+
+                        <DatePicker
+                            android:id="@+id/dateVisited"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:calendarViewShown="false"
+                            android:datePickerMode="spinner"
+                            tools:layout_editor_absoluteX="3dp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp">
+
+                    <Button
+                        android:id="@+id/detailsBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:background="@drawable/custom_button"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/button_details"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.062"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/detailsCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:visibility="gone">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp">
+
 
                         <EditText
                             android:id="@+id/diveTitle"
                             android:layout_width="248dp"
                             android:layout_height="57dp"
                             android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
                             android:autofillHints=""
                             android:hint="@string/hint_diveTitle"
                             android:inputType="text"
@@ -119,7 +254,7 @@
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="14sp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/heading" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <EditText
                             android:id="@+id/description"
@@ -185,11 +320,11 @@
                             android:layout_width="90dp"
                             android:layout_height="24dp"
                             android:layout_marginStart="32dp"
-                            android:layout_marginTop="25dp"
+                            android:layout_marginTop="16dp"
                             android:text="Coordinates"
                             android:textAlignment="center"
                             app:layout_constraintStart_toEndOf="@+id/diveTitle"
-                            app:layout_constraintTop_toTopOf="@id/heading" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
                         <EditText
@@ -204,121 +339,81 @@
                             android:padding="8dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="14sp"
-
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/description" />
-
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+
                     android:layout_width="match_parent"
-                    android:layout_height="250dp">
+                    android:layout_height="70dp">
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="250dp">
+                        android:layout_height="70dp">
 
-                        <TextView
+                        <Button
+                            android:id="@+id/equipmentBtn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Dive Site"
-                            android:textSize="20sp"
-                            tools:layout_editor_absoluteX="8dp"
-                            tools:layout_editor_absoluteY="16dp" />
-
-                        <com.google.android.gms.maps.MapView
-                            android:id="@+id/mapView"
-                            android:layout_width="394dp"
-                            android:layout_height="162dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="28dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_margin="16dp"
+                            android:background="@drawable/custom_button"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/button_equipment"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.666"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintHorizontal_bias="0.062"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp">
 
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp">
-
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Date Visited"
-                        android:textSize="20sp" />
-
-                    <DatePicker
-                        android:id="@+id/dateVisited"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:calendarViewShown="false"
-                        android:datePickerMode="spinner"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_editor_absoluteX="0dp" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/equipmentCard"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp">
+                    android:layout_height="170dp"
+                    android:visibility="gone">
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="250dp">
+                        android:layout_height="170dp">
 
-                        <TextView
-                            android:id="@+id/equipment"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Equipment"
-                            android:textSize="20sp" />
 
                         <EditText
                             android:id="@+id/weight"
                             android:layout_width="249dp"
                             android:layout_height="62dp"
                             android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
                             android:ems="10"
                             android:hint="@string/hint_weight"
                             android:inputType="number"
                             android:padding="8dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="14sp"
-                            app:layout_constraintStart_toEndOf="@+id/equipment"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/equipment" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <CheckBox
                             android:id="@+id/checkBoxWetSuit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="24dp"
                             android:layout_marginEnd="24dp"
                             android:text="Wetsuit"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.941"
                             app:layout_constraintStart_toEndOf="@+id/weight"
-                            app:layout_constraintTop_toBottomOf="@+id/equipment" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <CheckBox
                             android:id="@+id/checkBoxAir"
@@ -346,8 +441,40 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+
                     android:layout_width="match_parent"
-                    android:layout_height="200dp">
+                    android:layout_height="70dp">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp">
+
+                        <Button
+                            android:id="@+id/conditonsBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:background="@drawable/custom_button"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/button_conditions"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.062"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:id="@+id/conditionsCard"
+                    android:visibility="gone">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -355,34 +482,27 @@
                     android:layout_height="250dp">
 
 
-                    <TextView
-                        android:id="@+id/weatherHeading"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Conditions"
-                        android:textSize="20sp" />
-
                     <EditText
                         android:id="@+id/weather"
                         android:layout_width="378dp"
                         android:layout_height="58dp"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
                         android:ems="10"
                         android:hint="@string/hint_weather"
                         android:inputType="text"
                         android:padding="8dp"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="14sp"
-                        app:layout_constraintStart_toEndOf="@+id/weatherHeading"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/weatherHeading" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
                         android:id="@+id/ocean"
                         android:layout_width="378dp"
                         android:layout_height="58dp"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
                         android:ems="10"
                         android:hint="@string/hint_ocean"
                         android:inputType="text"
@@ -397,27 +517,53 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+
                     android:layout_width="match_parent"
-                    android:layout_height="320dp">
+                    android:layout_height="70dp">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp">
+
+                        <Button
+                            android:id="@+id/wildlifeBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:background="@drawable/custom_button"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/button_wildlife"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.062"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/wildlifeCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    android:visibility="gone">
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="320dp">
 
-                        <TextView
-                            android:id="@+id/wildlifeHeading"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Wildlife"
-                            android:textSize="20sp" />
 
                         <EditText
                             android:id="@+id/wildlife"
                             android:layout_width="378dp"
                             android:layout_height="58dp"
                             android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
                             android:ems="10"
                             android:hint="@string/hint_wildlife"
                             android:inputType="text"
@@ -425,7 +571,7 @@
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="14sp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/wildlifeHeading" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
                         <Button
@@ -434,6 +580,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"
                             android:background="@drawable/custom_button"
+                            android:backgroundTint="@color/colorFaint"
                             android:paddingTop="20dp"
                             android:paddingBottom="10dp"
                             android:text="@string/button_addWildlifeImage"
@@ -459,27 +606,53 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+
                     android:layout_width="match_parent"
-                    android:layout_height="320dp">
+                    android:layout_height="70dp">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp">
+
+                        <Button
+                            android:id="@+id/poiBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:background="@drawable/custom_button"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/button_wildlife"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.062"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/poiCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    android:visibility="gone">
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="320dp">
 
-                        <TextView
-                            android:id="@+id/POIHeading"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Points of Interest"
-                            android:textSize="20sp" />
 
                         <EditText
                             android:id="@+id/pointOfInterest"
                             android:layout_width="378dp"
                             android:layout_height="58dp"
                             android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
                             android:ems="10"
                             android:hint="@string/hint_POI"
                             android:inputType="text"
@@ -487,7 +660,7 @@
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="14sp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/POIHeading" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
                         <Button
@@ -496,6 +669,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"
                             android:background="@drawable/custom_button"
+                            android:backgroundTint="@color/colorFaint"
                             android:paddingTop="20dp"
                             android:paddingBottom="10dp"
                             android:text="@string/button_addPOIImage"

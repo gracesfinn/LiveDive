@@ -2,9 +2,12 @@ package org.wit.livedive.views.dive
 
 import android.content.Intent
 import android.os.Bundle
+import android.transition.AutoTransition
 import android.transition.Explode
+import android.transition.TransitionManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.Window
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -127,6 +130,97 @@ class DiveView : BaseView(), AnkoLogger {
             )
             presenter.doSelectImagePOI()
         } //Wildlife Image Selector
+
+        binding.detailsBtn.setOnClickListener{
+            if(binding.detailsCard.visibility == View.GONE){
+                TransitionManager.beginDelayedTransition(binding.cardView,AutoTransition())
+                binding.detailsCard.visibility = View.VISIBLE
+                binding.detailsBtn.text = "Close Details"
+            }
+            else{
+                TransitionManager.beginDelayedTransition(binding.cardView,AutoTransition())
+                binding.detailsCard.visibility = View.GONE
+                binding.detailsBtn.text = "Dive Details"
+            }
+        }
+
+        binding.siteLocationBtn.setOnClickListener{
+            if(binding.mapCard.visibility == View.GONE){
+                TransitionManager.beginDelayedTransition(binding.cardView,AutoTransition())
+                binding.mapCard.visibility = View.VISIBLE
+                binding.siteLocationBtn.text = "Close Map"
+            }
+            else{
+                TransitionManager.beginDelayedTransition(binding.cardView,AutoTransition())
+                binding.mapCard.visibility = View.GONE
+                binding.siteLocationBtn.text = "Dive Location"
+            }
+        }
+
+        binding.dateBtn.setOnClickListener{
+            if(binding.dateCard.visibility == View.GONE){
+                TransitionManager.beginDelayedTransition(binding.cardView,AutoTransition())
+                binding.dateCard.visibility = View.VISIBLE
+                binding.dateBtn.text = "Close Date Picker"
+            }
+            else{
+                TransitionManager.beginDelayedTransition(binding.cardView,AutoTransition())
+                binding.dateCard.visibility = View.GONE
+                binding.dateBtn.text = "Date of Dive"
+            }
+        }
+
+        binding.equipmentBtn.setOnClickListener{
+            if(binding.equipmentCard.visibility == View.GONE){
+                TransitionManager.beginDelayedTransition(binding.cardView,AutoTransition())
+                binding.equipmentCard.visibility = View.VISIBLE
+                binding.equipmentBtn.text = "Close Equipment"
+            }
+            else{
+                TransitionManager.beginDelayedTransition(binding.cardView,AutoTransition())
+                binding.equipmentCard.visibility = View.GONE
+                binding.equipmentBtn.text = "Dive Equipment"
+            }
+        }
+
+        binding.conditonsBtn.setOnClickListener{
+            if(binding.conditionsCard.visibility == View.GONE){
+                TransitionManager.beginDelayedTransition(binding.cardView,AutoTransition())
+                binding.conditionsCard.visibility = View.VISIBLE
+                binding.conditonsBtn.text = "Close Conditions"
+            }
+            else{
+                TransitionManager.beginDelayedTransition(binding.cardView,AutoTransition())
+                binding.conditionsCard.visibility = View.GONE
+                binding.conditonsBtn.text = "Dive Conditions"
+            }
+        }
+
+        binding.wildlifeBtn.setOnClickListener{
+            if(binding.wildlifeCard.visibility == View.GONE){
+                TransitionManager.beginDelayedTransition(binding.cardView,AutoTransition())
+                binding.wildlifeCard.visibility = View.VISIBLE
+                binding.wildlifeBtn.text = "Close Marine Life"
+            }
+            else{
+                TransitionManager.beginDelayedTransition(binding.cardView,AutoTransition())
+                binding.wildlifeCard.visibility = View.GONE
+                binding.wildlifeBtn.text = "Marine Life"
+            }
+        }
+
+        binding.poiBtn.setOnClickListener{
+            if(binding.poiCard.visibility == View.GONE){
+                TransitionManager.beginDelayedTransition(binding.cardView,AutoTransition())
+                binding.poiCard.visibility = View.VISIBLE
+                binding.poiBtn.text = "Close Points of Interest"
+            }
+            else{
+                TransitionManager.beginDelayedTransition(binding.cardView,AutoTransition())
+                binding.poiCard.visibility = View.GONE
+                binding.poiBtn.text = "Points of Interest"
+            }
+        }
 
     }
 
