@@ -20,7 +20,7 @@ val IMAGE_WILDLIFE_REQUEST = 2
 val IMAGE_POI_REQUEST = 3
 
 enum class VIEW {
-    LOCATION, DIVE, MAPS, LIST, LOGIN
+    LOCATION, DIVE, MAPS, LIST, LOGIN, FAVOURITE
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -35,6 +35,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
             VIEW.MAPS -> intent = Intent(this, DiveMapView::class.java)
             VIEW.LIST -> intent = Intent(this, DiveListView::class.java)
             VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
+            VIEW.FAVOURITE -> intent = Intent(this, DiveListView :: class.java).putExtra("favourite", true)
         }
         if (key != "") {
             intent.putExtra(key, value)
@@ -49,7 +50,10 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
         supportActionBar?.setDisplayHomeAsUpEnabled(upEnabled)
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
-            toolbar.title = "${title}: ${user.email}"
+            toolbar.title = "${user.email} 's ${title}"
+        }
+        if(intent.hasExtra("favourite")){
+            toolbar.title = "Favourite Dives"
         }
     }
 

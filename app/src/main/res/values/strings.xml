@@ -25,6 +25,7 @@
     <string name="button_equipment">Dive Equipment</string>
     <string name="button_conditions">Dive Conditions</string>
     <string name="button_wildlife">Marine Life</string>
+    <string name="button_poi">Points of Interest</string>
 
 
     <string name="menu_showMap">Map of Sites</string>

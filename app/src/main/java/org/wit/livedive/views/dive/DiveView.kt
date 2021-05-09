@@ -9,7 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.Window
-import android.widget.Toast
+import android.widget.RatingBar
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 
@@ -18,7 +18,6 @@ import org.jetbrains.anko.toast
 import org.wit.livedive.BaseView
 import org.wit.livedive.R
 import org.wit.livedive.databinding.ActivityDiveBinding
-import org.wit.livedive.helpers.readImageFromPath
 import org.wit.livedive.models.DiveModel
 import org.wit.livedive.models.Location
 
@@ -69,6 +68,21 @@ class DiveView : BaseView(), AnkoLogger {
             if(isChecked)
                 presenter.doCheckNitrox(true)
         }
+
+        binding.favCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked)
+                toast("Added to Favourites")
+                presenter.doCheckFavourite(true)
+        }
+
+        binding.ratingBar.setOnRatingBarChangeListener(object :
+            RatingBar.OnRatingBarChangeListener {
+            override fun onRatingChanged(ratignBar: RatingBar?, rating: Float, fromUser: Boolean) {
+                toast("Rating is: $rating")
+                presenter.doCheckRatingBar(rating)
+            }
+
+        })
 
 
 
@@ -222,6 +236,8 @@ class DiveView : BaseView(), AnkoLogger {
             }
         }
 
+
+
     }
 
     override fun showLocation (loc: Location){
@@ -229,7 +245,7 @@ class DiveView : BaseView(), AnkoLogger {
         binding.lng.setText("%.6f".format(loc.lng))
     }
 
-    override fun showDive(dive: DiveModel?) {
+      override fun showDive(dive:DiveModel?) {
        if (binding.diveTitle.text.isEmpty()) if (dive != null) {
            binding.diveTitle.setText(dive.title)
        }
@@ -239,8 +255,6 @@ class DiveView : BaseView(), AnkoLogger {
         binding.checkBoxWetSuit.isChecked
         binding.checkBoxAir.isChecked
         binding.checkBoxNitrox.isChecked
-
-
 
 
        if (dive != null) {

@@ -209,6 +209,17 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         dive.nitrox = nitrox
     }
 
+    fun doCheckRatingBar(rating:Float)
+    {
+        dive.rating = rating
+    }
+
+    fun doCheckFavourite(
+        favourite : Boolean
+    ){
+        dive.favourite = favourite
+    }
+
     override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         when (requestCode) {
             IMAGE_REQUEST -> {

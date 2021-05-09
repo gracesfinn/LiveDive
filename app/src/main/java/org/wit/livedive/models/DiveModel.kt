@@ -32,6 +32,8 @@ data class DiveModel(
     var poiImage : String ?= "",
     var poi : String ?= "",
     var additionalNotes : String ?= "",
+    var rating: Float = 0f,
+    var favourite: Boolean = false,
     @Embedded var location : Location = Location()
 )
     : Parcelable {
@@ -57,7 +59,9 @@ data class DiveModel(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readFloat(),
+        parcel.readBoolean()
     ) {
     }
 
@@ -83,6 +87,8 @@ data class DiveModel(
         parcel.writeString(poiImage)
         parcel.writeString(poi)
         parcel.writeString(additionalNotes)
+        parcel.writeFloat(rating)
+        parcel.writeBoolean(favourite)
     }
 
     override fun describeContents(): Int {

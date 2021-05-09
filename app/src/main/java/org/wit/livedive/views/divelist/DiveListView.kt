@@ -35,7 +35,7 @@ class DiveListView :  BaseView(), DiveListener {
 
                 R.id.item_logout -> presenter.doLogout()
                 R.id.item_map -> presenter.doShowDivesMap()
-                //R.id.item_favourite -> presenter.doShowFavourites()
+                R.id.item_favourite -> presenter.doShowFavourites()
                // R.id.item_settings -> presenter.doUpdateUser()
                 R.id.item_home-> presenter.doShowList()
             }

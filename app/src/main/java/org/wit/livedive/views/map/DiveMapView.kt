@@ -7,7 +7,6 @@ import com.google.android.gms.maps.model.Marker
 
 import org.wit.livedive.BaseView
 import org.wit.livedive.databinding.ActivityDiveMapsBinding
-import org.wit.livedive.helpers.readImageFromPath
 import org.wit.livedive.models.DiveModel
 
 class DiveMapView : BaseView(), GoogleMap.OnMarkerClickListener  {

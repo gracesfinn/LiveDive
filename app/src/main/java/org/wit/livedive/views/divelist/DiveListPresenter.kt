@@ -28,11 +28,27 @@ class DiveListPresenter (view: BaseView) : BasePresenter(view) {
         view?.navigateTo(VIEW.MAPS)
     }
 
+    fun doShowFavourites() {
+        view?.navigateTo(VIEW.FAVOURITE)
+    }
+
     fun loadDives() {
         doAsync {
             val dives = app.dives.findAll()
+            var favDives = mutableListOf<DiveModel>()
             uiThread {
-                view?.showDives(dives)
+                if(view!!.intent.hasExtra("favourite"))
+                {
+                    for(dive in dives){
+                        if (dive.favourite == true){
+                            favDives.add(dive)
+                        }
+                    }
+                    view?.showDives(favDives)
+                }
+                else {
+                    view?.showDives(dives)
+                }
             }
         }
     }
