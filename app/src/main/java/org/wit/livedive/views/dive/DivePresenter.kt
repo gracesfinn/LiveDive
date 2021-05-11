@@ -19,6 +19,7 @@ import org.wit.livedive.helpers.isPermissionGranted
 import org.wit.livedive.helpers.showImagePicker
 import org.wit.livedive.models.DiveModel
 import org.wit.livedive.models.Location
+import org.wit.livedive.models.firebase.DiveFireStore
 
 
 class DivePresenter(view: BaseView) : BasePresenter(view) {
@@ -30,7 +31,9 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
     var edit = false;
     var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
     val locationRequest = createDefaultLocationRequest()
-    var locationManualyChanged = false;
+    var locationManualyChanged = false
+
+    var fireStore: DiveFireStore? = null
 
 
     init {
@@ -171,10 +174,11 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         doAsync {
             app.dives.delete(dive)
             uiThread {
-                view?.finish()
+                view?.navigateTo(VIEW.LIST)
             }
         }
     }
+
 
     fun doSelectImage() {
         showImagePicker(view!!, IMAGE_REQUEST)

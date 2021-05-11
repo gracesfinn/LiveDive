@@ -26,6 +26,8 @@
     <string name="button_conditions">Dive Conditions</string>
     <string name="button_wildlife">Marine Life</string>
     <string name="button_poi">Points of Interest</string>
+    <string name="button_settings">Update and Sign In</string>
+    <string name="button_passwordReset">Reset Password</string>
 
 
     <string name="menu_showMap">Map of Sites</string>
@@ -35,12 +37,14 @@
     <string name="menu_cancelDive">Cancel</string>
     <string name="menu_saveDive">Save</string>
     <string name="menu_deleteDive">Delete</string>
+    <string name="menu_cancel">Cancel Update</string>
 
     <string name="title_activity_dive_list">Dive Log</string>
     <string name="title_activity_dive">Log Dive</string>
     <string name="title_activity_location">Dive Sites</string>
     <string name="title_activity_login"> Signup/Login to Live Dive</string>
     <string name="title_activity_map">Map of Dive Sites</string>
+    <string name="title_settings">Settings</string>
 
     <string name="dive_image_placeholder">Dive Image</string>
     <string name="dive_title_placeholder">Dive Title</string>

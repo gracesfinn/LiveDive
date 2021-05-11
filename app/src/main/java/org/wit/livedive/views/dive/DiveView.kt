@@ -246,15 +246,42 @@ class DiveView : BaseView(), AnkoLogger {
     }
 
       override fun showDive(dive:DiveModel?) {
-       if (binding.diveTitle.text.isEmpty()) if (dive != null) {
+
+          if (binding.diveTitle.text.isEmpty()) if (dive != null) {
            binding.diveTitle.setText(dive.title)
-       }
-       if (binding.description.text.isEmpty()) if (dive != null) {
+          }
+          if (binding.description.text.isEmpty()) if (dive != null) {
            binding.description.setText(dive.description)
-       }
-        binding.checkBoxWetSuit.isChecked
-        binding.checkBoxAir.isChecked
-        binding.checkBoxNitrox.isChecked
+          }
+          if (binding.maxDepth.text.isEmpty()) if (dive != null) {
+              binding.maxDepth.setText(dive.maxDepth)
+          }
+          if (binding.diveTime.text.isEmpty()) if (dive != null) {
+              binding.diveTime.setText(dive.mins)
+          }
+          if (binding.weight.text.isEmpty()) if (dive != null) {
+              binding.weight.setText(dive.weight)
+          }
+          if (binding.weather.text.isEmpty()) if (dive != null) {
+              binding.weather.setText(dive.weather)
+          }
+          if (binding.ocean.text.isEmpty()) if (dive != null) {
+              binding.ocean.setText(dive.ocean)
+          }
+          if (binding.wildlife.text.isEmpty()) if (dive != null) {
+              binding.wildlife.setText(dive.wildlife)
+          }
+          if (binding.pointOfInterest.text.isEmpty()) if (dive != null) {
+              binding.pointOfInterest.setText(dive.poi)
+          }
+          binding.checkBoxWetSuit.isChecked
+          binding.checkBoxAir.isChecked
+          binding.checkBoxNitrox.isChecked
+          binding.favCheckBox.isChecked
+
+          if (dive != null) {
+              binding.dateVisited.updateDate(dive.yearVisited, dive.monthVisited, dive.dayVisited)
+          }
 
 
        if (dive != null) {

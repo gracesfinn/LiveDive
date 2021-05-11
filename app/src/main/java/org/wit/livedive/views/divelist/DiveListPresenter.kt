@@ -32,6 +32,10 @@ class DiveListPresenter (view: BaseView) : BasePresenter(view) {
         view?.navigateTo(VIEW.FAVOURITE)
     }
 
+    fun doUpdateUser() {
+        view?.navigateTo(VIEW.SETTINGS)
+    }
+
     fun loadDives() {
         doAsync {
             val dives = app.dives.findAll()

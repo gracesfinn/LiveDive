@@ -13,6 +13,7 @@ import org.wit.livedive.views.divelist.DiveListView
 import org.wit.livedive.views.location.EditLocationView
 import org.wit.livedive.views.login.LoginView
 import org.wit.livedive.views.map.DiveMapView
+import org.wit.livedive.views.settings.SettingsView
 
 val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 4
@@ -20,12 +21,14 @@ val IMAGE_WILDLIFE_REQUEST = 2
 val IMAGE_POI_REQUEST = 3
 
 enum class VIEW {
-    LOCATION, DIVE, MAPS, LIST, LOGIN, FAVOURITE
+    LOCATION, DIVE, MAPS, LIST, LOGIN, FAVOURITE, SETTINGS
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
 
     var basePresenter: BasePresenter? = null
+
+    open var user = FirebaseAuth.getInstance().currentUser
 
     fun navigateTo(view: VIEW, code: Int = 0, key: String = "", value: Parcelable? = null) {
         var intent = Intent(this, DiveListView::class.java)
@@ -36,6 +39,8 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
             VIEW.LIST -> intent = Intent(this, DiveListView::class.java)
             VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
             VIEW.FAVOURITE -> intent = Intent(this, DiveListView :: class.java).putExtra("favourite", true)
+            VIEW.SETTINGS -> intent = Intent( this, SettingsView::class.java)
+
         }
         if (key != "") {
             intent.putExtra(key, value)
@@ -68,8 +73,6 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
         toolbar.title = title
         setSupportActionBar(toolbar)
     }
-
-
 
 
     override fun onDestroy() {
