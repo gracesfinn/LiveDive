@@ -133,28 +133,38 @@ data class Location(var lat: Double = 0.0,
 
 @Entity
 data class UserModel(
-    @PrimaryKey(autoGenerate = true) var userId: Long = 0,
+    @PrimaryKey(autoGenerate = true) var userId: String? = "",
     var name: String? ="",
     var email: String? ="",
     var password: String? ="",
+    var numDives: String? = "",
+    var certification: String? ="",
+    var certNum: String? = ""
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readLong(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
-    ) {
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeLong(userId)
+        parcel.writeString(userId)
         parcel.writeString(name)
         parcel.writeString(email)
         parcel.writeString(password)
+        parcel.writeString(numDives)
+        parcel.writeString(certification)
+        parcel.writeString(certNum)
     }
 
     override fun describeContents(): Int {
         return 0
+    }
+
+    fun add() {
+
     }
 
     companion object CREATOR : Parcelable.Creator<UserModel> {

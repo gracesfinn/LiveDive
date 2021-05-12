@@ -4,17 +4,22 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import org.jetbrains.anko.toast
 import org.wit.livedive.BaseView
 import org.wit.livedive.R
 import org.wit.livedive.databinding.ActivitySettingsBinding
 import org.wit.livedive.databinding.UserLoginBinding
+import org.wit.livedive.models.UserModel
 
 
 class SettingsView : BaseView()  {
 
     lateinit var presenter: SettingsPresenter
-    override var user = FirebaseAuth.getInstance().currentUser
+    lateinit var auth: FirebaseAuth
+    var databaseReference: DatabaseReference? = null
+    var database: FirebaseDatabase? = null
+
     private lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +30,16 @@ class SettingsView : BaseView()  {
         setContentView(view)
         super.onCreate(savedInstanceState)
 
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        databaseReference = database?.reference!!.child("users").child("profile")
+
+        loadProfile()
+
+
+
         binding.userEmail.text = user?.email
+
 
         presenter = initPresenter(SettingsPresenter(this)) as SettingsPresenter
 
@@ -58,6 +72,25 @@ class SettingsView : BaseView()  {
         }
 
     }
+    private fun loadProfile(){
+        val user = auth.currentUser
+        val userReference = databaseReference?.child(user?.uid!!)
+
+        userReference?.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                binding.userName.text = snapshot.child("name").value.toString()
+                binding.userNumDives.text = snapshot.child("numberOfDives").value.toString()
+                binding.userCert.text = snapshot.child("certification").value.toString()
+                binding.userCertNum.text = snapshot.child("certNumber").value.toString()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_cancel, menu)

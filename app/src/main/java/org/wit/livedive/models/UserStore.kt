@@ -4,7 +4,7 @@ interface UserStore {
 
 
     fun findAll(): List<UserModel>
-    fun create(user:UserModel)
+    fun createUser(user:UserModel)
     fun findUserByEmail(email: String): UserModel?
     fun updateUser(user: UserModel)
 }

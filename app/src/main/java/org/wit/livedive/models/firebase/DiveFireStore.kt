@@ -10,12 +10,14 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import org.wit.livedive.models.DiveModel
 import org.wit.livedive.models.DiveStore
+import org.wit.livedive.models.UserModel
 import java.io.ByteArrayOutputStream
 import java.io.File
 
 class DiveFireStore(val context: Context) : DiveStore, AnkoLogger {
 
     val dives = ArrayList<DiveModel>()
+    val user = UserModel
     lateinit var userId: String
     lateinit var db: DatabaseReference
     lateinit var st: StorageReference
@@ -38,6 +40,16 @@ class DiveFireStore(val context: Context) : DiveStore, AnkoLogger {
             db.child("users").child(userId).child("dives").child(key).setValue(dive)
         }
     }
+
+   /* fun createUser(user: UserModel){
+        db = FirebaseDatabase.getInstance().reference
+        val key = db.child("users").child(userId).child("userDetails").push().key
+        key.let {
+            user.userId = key
+            user.add()
+            db.child("users").child(userId).child("userDetails").setValue(user)
+        }
+    }*/
 
     override fun update(dive: DiveModel) {
         var foundDive: DiveModel? = dives.find { p -> p.fbId == dive.fbId }

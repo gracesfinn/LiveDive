@@ -26,14 +26,9 @@ class LoginView : BaseView() {
         presenter = initPresenter(LoginPresenter(this)) as LoginPresenter
 
         binding.signUp.setOnClickListener {
-            val email = binding.email.text.toString()
-            val password = binding.password.text.toString()
-            if (email == "" || password == "") {
-                toast("Please provide email + password")
-            }
-            else {
-                presenter.doSignUp(email,password)
-            }
+
+                presenter.doSignUp()
+
         }
 
         binding.logIn.setOnClickListener {

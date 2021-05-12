@@ -57,6 +57,10 @@
             android:label="@string/title_activity_dive_list">
         </activity>
 
+        <activity android:name=".views.register.RegisterView"
+            android:label="@string/title_register">
+        </activity>
+
         <activity android:name=".views.login.LoginView"
             android:label="@string/title_activity_login"
             android:launchMode="singleTop"/>

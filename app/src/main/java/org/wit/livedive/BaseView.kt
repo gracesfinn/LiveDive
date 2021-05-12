@@ -13,6 +13,7 @@ import org.wit.livedive.views.divelist.DiveListView
 import org.wit.livedive.views.location.EditLocationView
 import org.wit.livedive.views.login.LoginView
 import org.wit.livedive.views.map.DiveMapView
+import org.wit.livedive.views.register.RegisterView
 import org.wit.livedive.views.settings.SettingsView
 
 val IMAGE_REQUEST = 1
@@ -21,7 +22,7 @@ val IMAGE_WILDLIFE_REQUEST = 2
 val IMAGE_POI_REQUEST = 3
 
 enum class VIEW {
-    LOCATION, DIVE, MAPS, LIST, LOGIN, FAVOURITE, SETTINGS
+    LOCATION, DIVE, MAPS, LIST, LOGIN, FAVOURITE, SETTINGS, REGISTER
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -40,6 +41,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
             VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
             VIEW.FAVOURITE -> intent = Intent(this, DiveListView :: class.java).putExtra("favourite", true)
             VIEW.SETTINGS -> intent = Intent( this, SettingsView::class.java)
+            VIEW.REGISTER  -> intent = Intent(this,RegisterView::class.java)
 
         }
         if (key != "") {
