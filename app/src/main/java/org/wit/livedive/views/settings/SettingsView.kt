@@ -1,8 +1,11 @@
 package org.wit.livedive.views.settings
 
 import android.os.Bundle
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import org.jetbrains.anko.toast
@@ -10,6 +13,7 @@ import org.wit.livedive.BaseView
 import org.wit.livedive.R
 import org.wit.livedive.databinding.ActivitySettingsBinding
 import org.wit.livedive.databinding.UserLoginBinding
+import org.wit.livedive.models.DiveModel
 import org.wit.livedive.models.UserModel
 
 
@@ -19,6 +23,12 @@ class SettingsView : BaseView()  {
     lateinit var auth: FirebaseAuth
     var databaseReference: DatabaseReference? = null
     var database: FirebaseDatabase? = null
+
+
+
+
+
+
 
     private lateinit var binding: ActivitySettingsBinding
 
@@ -71,6 +81,20 @@ class SettingsView : BaseView()  {
 
         }
 
+        binding.updateEmailBtn.setOnClickListener{
+            if(binding.updateEmailCard.visibility == View.GONE){
+                TransitionManager.beginDelayedTransition(binding.settingsLayout, AutoTransition())
+                binding.updateEmailCard.visibility = View.VISIBLE
+                binding.updateEmailBtn.text = "Close Update"
+
+            }
+            else{
+                TransitionManager.beginDelayedTransition(binding.settingsLayout, AutoTransition())
+                binding.updateEmailCard.visibility = View.GONE
+                binding.updateEmailBtn.text = "Update Email"
+            }
+        }
+
     }
     private fun loadProfile(){
         val user = auth.currentUser
@@ -78,10 +102,13 @@ class SettingsView : BaseView()  {
 
         userReference?.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                binding.userName.text = snapshot.child("name").value.toString()
-                binding.userNumDives.text = snapshot.child("numberOfDives").value.toString()
+                binding.userName.text =  snapshot.child("name").value.toString()
+                val intNumDives: Int = snapshot.child("numberOfDives").value.toString().toInt()
+                val currentNumDives = intNumDives.plus(presenter.totalDives)
+                binding.userNumDives.text = "Number of Dives: ${currentNumDives}"
                 binding.userCert.text = snapshot.child("certification").value.toString()
-                binding.userCertNum.text = snapshot.child("certNumber").value.toString()
+                binding.userCertNum.text = "${snapshot.child("certification").value.toString()} Number: ${snapshot.child("certNumber").value.toString()}"
+
             }
 
             override fun onCancelled(error: DatabaseError) {

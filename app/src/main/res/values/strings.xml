@@ -28,6 +28,8 @@
     <string name="button_poi">Points of Interest</string>
     <string name="button_settings">Update and Sign In</string>
     <string name="button_passwordReset">Reset Password</string>
+    <string name="button_profilePic">Set Profile Image</string>
+    <string name="button_changeEmail">Update Email</string>
 
 
     <string name="menu_showMap">Map of Sites</string>

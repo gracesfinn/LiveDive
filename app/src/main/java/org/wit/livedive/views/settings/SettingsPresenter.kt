@@ -16,6 +16,20 @@ class SettingsPresenter  (view: BaseView) : BasePresenter(view){
     var user = FirebaseAuth.getInstance().currentUser
     val emailAddress = user!!.email
     lateinit var db: DatabaseReference
+    val dives = app.dives.findAll()
+    var totalDives = 0
+
+    init{
+
+        for(dive in dives){
+            totalDives = dives.size
+        }
+    }
+
+
+
+
+
 
     fun doUpdateEmail(email: String) {
         user!!.updateEmail(email)

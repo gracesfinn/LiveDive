@@ -39,94 +39,130 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_margin="15dp">
+                android:layout_margin="15dp"
+                >
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="310dp">
+                    android:layout_height="320dp">
 
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="310dp">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="320dp">
 
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="189dp"
+                            android:layout_height="163dp"
+                            android:layout_marginStart="96dp"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:srcCompat="@drawable/livedive" />
 
-                    <TextView
-                        android:id="@+id/user_email"
-                        android:layout_width="328dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Email"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        android:textColor="@color/colorHint"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/user_name" />
+                        <TextView
+                            android:id="@+id/user_email"
+                            android:layout_width="328dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Email"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@color/colorAccent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
-                    <TextView
-                        android:id="@+id/user_name"
-                        android:layout_width="328dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Name"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textColor="@color/colorHint"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                        <TextView
+                            android:id="@+id/user_name"
+                            android:layout_width="328dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Name"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textColor="@color/colorAccent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-                    <TextView
-                        android:id="@+id/user_cert"
-                        android:layout_width="328dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Certification"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        android:textColor="@color/colorHint"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/user_email" />
+                        <TextView
+                            android:id="@+id/user_cert"
+                            android:layout_width="153dp"
+                            android:layout_height="22dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Certification"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@color/colorAccent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/user_email" />
 
-                    <TextView
-                        android:id="@+id/user_certNum"
-                        android:layout_width="328dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Certification Number"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        android:textColor="@color/colorHint"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/user_cert" />
+                        <TextView
+                            android:id="@+id/user_certNum"
+                            android:layout_width="154dp"
+                            android:layout_height="41dp"
+                            android:layout_marginStart="192dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Certification Number"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@color/colorAccent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/user_email" />
 
-                    <TextView
-                        android:id="@+id/user_NumDives"
-                        android:layout_width="328dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Number of Dives"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        android:textColor="@color/colorHint"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/user_certNum" />
+                        <TextView
+                            android:id="@+id/user_NumDives"
+                            android:layout_width="328dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Number of Dives"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@color/colorAccent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/user_certNum" />
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+
                     android:layout_width="match_parent"
-                    android:layout_height="310dp">
+                    android:layout_height="70dp">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp">
+
+                        <Button
+                            android:id="@+id/updateEmailBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/custom_button"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/button_changeEmail"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.062"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/updateEmailCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="310dp"
+                    android:visibility="gone">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
