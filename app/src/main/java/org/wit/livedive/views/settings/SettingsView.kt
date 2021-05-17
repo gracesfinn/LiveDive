@@ -20,9 +20,9 @@ import org.wit.livedive.models.DiveModel
 class SettingsView : BaseView()  {
 
     lateinit var presenter: SettingsPresenter
-    lateinit var auth: FirebaseAuth
-    var databaseReference: DatabaseReference? = null
-    var database: FirebaseDatabase? = null
+    //lateinit var auth: FirebaseAuth
+    //var databaseReference: DatabaseReference? = null
+   // var database: FirebaseDatabase? = null
 
 
 
@@ -108,12 +108,13 @@ class SettingsView : BaseView()  {
                 binding.userNumDives.text = "Number of Dives: ${currentNumDives}"
                 binding.userCert.text = snapshot.child("certification").value.toString()
                 binding.userCertNum.text = "${snapshot.child("certification").value.toString()} Number: ${snapshot.child("certNumber").value.toString()}"
+                binding.userDiveStauts.text = snapshot.child("diveStatus").value.toString()
 
             }
 
             override fun onCancelled(error: DatabaseError) {
                 presenter.doCancel()
-                
+
             }
         })
     }

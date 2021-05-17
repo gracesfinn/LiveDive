@@ -27,10 +27,10 @@ class RegisterView:  BaseView() {
     private val REQUEST_IMAGE_CAPTURE = 100
 
 
-    var databaseReference: DatabaseReference? = null
-    var database: FirebaseDatabase? = null
-    lateinit var auth: FirebaseAuth
-    private lateinit var userId: String
+   // var databaseReference: DatabaseReference? = null
+    //var database: FirebaseDatabase? = null
+  //  lateinit var auth: FirebaseAuth
+  //  private lateinit var userId: String
     private lateinit var imageUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,13 +77,21 @@ class RegisterView:  BaseView() {
 
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
+            val password2 = binding.password2.text.toString()
             val name = binding.userName.text.toString()
             val certification = binding.certification.text.toString()
             val numDives = binding.NumDives.text.toString()
             val certNum = binding.certNum.text.toString()
+            val diveStatus = binding.diveStatus.text.toString()
             if (email == "" || password == "") {
                 toast("Please provide email + password")
-            } else {
+            }
+            else if (password != password2)
+            {
+                toast("Passwords do not match, please re-enter")
+            }
+
+                else {
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                     if (it.isSuccessful) {
                         val currentUser = auth.currentUser
@@ -92,6 +100,7 @@ class RegisterView:  BaseView() {
                         currentUserDB.child("numberOfDives").setValue(numDives)
                         currentUserDB.child("certification").setValue(certification)
                         currentUserDB.child("certNumber").setValue(certNum)
+                        currentUserDB.child("diveStatus").setValue(diveStatus)
                         presenter.doSignUp()
                     } else {
                         Toast.makeText(

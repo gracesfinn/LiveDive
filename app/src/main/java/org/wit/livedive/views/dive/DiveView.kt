@@ -1,6 +1,7 @@
 package org.wit.livedive.views.dive
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.transition.AutoTransition
@@ -39,15 +40,12 @@ class DiveView : BaseView(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //Delete Confirmation Window
 
 
-        with(window) {
-            requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
-            // set set the transition to be shown when the user enters this activity
-            enterTransition = Explode()
-            // set the transition to be shown when the user leaves this activity
-            exitTransition = Explode()
-        }
+
+
+
 
         binding = ActivityDiveBinding.inflate(layoutInflater)
         val view = binding.root
@@ -368,7 +366,15 @@ class DiveView : BaseView(), AnkoLogger {
                 }
             }
             R.id.item_delete -> {
-                presenter.doDelete()
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Are you sure?")
+                builder.setMessage("Do you want to delete this dive?")
+                builder.setPositiveButton("Yes") { dialogInterface: DialogInterface, i: Int ->
+                    presenter.doDelete()
+                    toast("Please Log In to Confirm Delete")
+                }
+                builder.setNegativeButton("No", { dialogInterface: DialogInterface, i: Int -> })
+                builder.show()
             }
             R.id.item_cancel -> {
                 presenter.doCancel()

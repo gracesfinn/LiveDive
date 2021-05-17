@@ -5,6 +5,7 @@ import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import org.jetbrains.anko.AnkoLogger
 import org.wit.livedive.models.DiveModel
 import org.wit.livedive.models.Location
@@ -32,6 +33,9 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
     var basePresenter: BasePresenter? = null
 
     open var user = FirebaseAuth.getInstance().currentUser
+    lateinit var auth: FirebaseAuth
+    var databaseReference: DatabaseReference? = null
+    var database: FirebaseDatabase? = null
 
     fun navigateTo(view: VIEW, code: Int = 0, key: String = "", value: Parcelable? = null) {
         var intent = Intent(this, DiveListView::class.java)
@@ -56,12 +60,15 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
 
 
     fun init(toolbar: Toolbar, upEnabled: Boolean) {
+
+        //val user = auth.currentUser
+        val userReference = databaseReference?.child(user?.uid!!)
         toolbar.title = title
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(upEnabled)
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
-            toolbar.title = "${user.email} 's ${title}"
+            toolbar.title = user.displayName+ "'s" + title
         }
         if(intent.hasExtra("favourite")){
             toolbar.title = "Favourite Dives"

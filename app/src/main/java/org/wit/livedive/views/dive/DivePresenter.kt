@@ -174,7 +174,8 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         doAsync {
             app.dives.delete(dive)
             uiThread {
-                view?.navigateTo(VIEW.LIST)
+                view?.navigateTo(VIEW.LOGIN)
+
             }
         }
     }
