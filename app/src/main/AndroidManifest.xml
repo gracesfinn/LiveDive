@@ -3,6 +3,7 @@
     package="org.wit.livedive">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".main.MainApp"
@@ -29,6 +30,15 @@
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".views.divelist.DiveListView" />
+        </activity>
+
+        <activity
+            android:name=".views.socialMap.SocialMapView"
+            android:label="@string/title_activity_map"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.divelist.DiveListView" />
         </activity>
 
         <activity

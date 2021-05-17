@@ -1,5 +1,6 @@
 package org.wit.livedive.views.dive
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.transition.AutoTransition
@@ -14,14 +15,19 @@ import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.wit.livedive.BaseView
 import org.wit.livedive.R
 import org.wit.livedive.databinding.ActivityDiveBinding
 import org.wit.livedive.models.DiveModel
 import org.wit.livedive.models.Location
+import retrofit2.Call
+import retrofit2.Response
+import javax.security.auth.callback.Callback
 
 class DiveView : BaseView(), AnkoLogger {
+
 
     lateinit var presenter: DivePresenter
     var dive = DiveModel()
@@ -29,8 +35,11 @@ class DiveView : BaseView(), AnkoLogger {
     private lateinit var binding: ActivityDiveBinding
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 
         with(window) {
             requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
@@ -259,9 +268,19 @@ class DiveView : BaseView(), AnkoLogger {
           if (binding.diveTime.text.isEmpty()) if (dive != null) {
               binding.diveTime.setText(dive.mins)
           }
+
+          if(!binding.favCheckBox.isChecked) if ( dive != null)
+          {
+              binding.favCheckBox.isChecked()
+          }
+
           if (binding.weight.text.isEmpty()) if (dive != null) {
               binding.weight.setText(dive.weight)
           }
+          binding.checkBoxWetSuit.isChecked
+          binding.checkBoxAir.isChecked
+          binding.checkBoxNitrox.isChecked
+
           if (binding.weather.text.isEmpty()) if (dive != null) {
               binding.weather.setText(dive.weather)
           }
@@ -274,10 +293,7 @@ class DiveView : BaseView(), AnkoLogger {
           if (binding.pointOfInterest.text.isEmpty()) if (dive != null) {
               binding.pointOfInterest.setText(dive.poi)
           }
-          binding.checkBoxWetSuit.isChecked
-          binding.checkBoxAir.isChecked
-          binding.checkBoxNitrox.isChecked
-          binding.favCheckBox.isChecked
+
 
           if (dive != null) {
               binding.dateVisited.updateDate(dive.yearVisited, dive.monthVisited, dive.dayVisited)
@@ -397,6 +413,24 @@ class DiveView : BaseView(), AnkoLogger {
         super.onSaveInstanceState(outState)
         binding.mapView.onSaveInstanceState(outState)
     }
+
+    /*override fun onFailure(call: Call<List<DiveModel>>, t:Throwable)
+    {
+        info("Retrofit Error : $t.message")
+
+    }
+
+    override fun onResponse(
+        call: Call<List<DiveModel>>,
+        response: Response<List<DiveModel>>
+    )
+    {
+        info("Retrofit JSON = $response.raw()")
+        app.diveStore.dives = response.body() as ArrayList<DiveModel>
+
+
+    }*/
+
 
 
 }

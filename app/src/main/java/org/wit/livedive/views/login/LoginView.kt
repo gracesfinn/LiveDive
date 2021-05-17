@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import org.jetbrains.anko.toast
 import org.wit.livedive.BaseView
-import org.wit.livedive.databinding.ActivityLoginBinding
 import org.wit.livedive.databinding.UserLoginBinding
 
 

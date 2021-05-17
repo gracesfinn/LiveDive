@@ -10,14 +10,14 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import org.wit.livedive.models.DiveModel
 import org.wit.livedive.models.DiveStore
-import org.wit.livedive.models.UserModel
+
 import java.io.ByteArrayOutputStream
 import java.io.File
 
 class DiveFireStore(val context: Context) : DiveStore, AnkoLogger {
 
     val dives = ArrayList<DiveModel>()
-    val user = UserModel
+
     lateinit var userId: String
     lateinit var db: DatabaseReference
     lateinit var st: StorageReference

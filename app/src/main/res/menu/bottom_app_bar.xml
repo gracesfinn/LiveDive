@@ -6,7 +6,7 @@
         android:id="@+id/item_map"
         android:backgroundTint="@color/colorAccent"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_map"
+        android:icon="@drawable/ic_map"
         android:textColor="@color/colorPrimaryDark"
         android:title="@string/menu_showMap"
         android:visible="true"
@@ -14,7 +14,7 @@
 
     <item
         android:id="@+id/item_favourite"
-        android:icon="@drawable/ic_baseline_favorite_24"
+        android:icon="@drawable/ic_favorite"
         android:textColor="@color/colorPrimaryDark"
         android:title="Favourites"
         app:showAsAction="never"
@@ -23,7 +23,7 @@
     <item
         android:id="@+id/item_settings"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_settings"
+        android:icon="@drawable/ic_settings"
         android:textColor="@color/colorPrimaryDark"
         android:title="Settings"
         android:visible="true"

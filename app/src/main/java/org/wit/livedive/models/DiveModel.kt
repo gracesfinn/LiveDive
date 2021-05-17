@@ -72,6 +72,7 @@ data class DiveModel(
         parcel.writeInt(yearVisited)
         parcel.writeString(maxDepth)
         parcel.writeString(mins)
+        parcel.writeString(weight)
         parcel.writeString(weather)
         parcel.writeString(ocean)
         parcel.writeString(wildlifeImage)
@@ -125,54 +126,6 @@ data class Location(var lat: Double = 0.0,
         }
 
         override fun newArray(size: Int): Array<Location?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
-
-
-@Entity
-data class UserModel(
-    @PrimaryKey(autoGenerate = true) var userId: String? = "",
-    var name: String? ="",
-    var email: String? ="",
-    var password: String? ="",
-    var numDives: String? = "",
-    var certification: String? ="",
-    var certNum: String? = ""
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()) {
-    }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(userId)
-        parcel.writeString(name)
-        parcel.writeString(email)
-        parcel.writeString(password)
-        parcel.writeString(numDives)
-        parcel.writeString(certification)
-        parcel.writeString(certNum)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    fun add() {
-
-    }
-
-    companion object CREATOR : Parcelable.Creator<UserModel> {
-        override fun createFromParcel(parcel: Parcel): UserModel {
-            return UserModel(parcel)
-        }
-
-        override fun newArray(size: Int): Array<UserModel?> {
             return arrayOfNulls(size)
         }
     }

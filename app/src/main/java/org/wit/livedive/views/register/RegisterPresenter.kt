@@ -7,7 +7,7 @@ import com.google.firebase.database.FirebaseDatabase
 import org.jetbrains.anko.toast
 import org.wit.livedive.*
 import org.wit.livedive.helpers.showImagePicker
-import org.wit.livedive.models.UserModel
+
 import org.wit.livedive.models.firebase.DiveFireStore
 
 class RegisterPresenter (view: BaseView) : BasePresenter(view) {

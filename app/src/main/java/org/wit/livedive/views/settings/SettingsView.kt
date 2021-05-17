@@ -14,7 +14,7 @@ import org.wit.livedive.R
 import org.wit.livedive.databinding.ActivitySettingsBinding
 import org.wit.livedive.databinding.UserLoginBinding
 import org.wit.livedive.models.DiveModel
-import org.wit.livedive.models.UserModel
+
 
 
 class SettingsView : BaseView()  {
@@ -112,7 +112,8 @@ class SettingsView : BaseView()  {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                presenter.doCancel()
+                
             }
         })
     }
