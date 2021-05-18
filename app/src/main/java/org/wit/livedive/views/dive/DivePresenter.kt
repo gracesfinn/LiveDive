@@ -41,6 +41,7 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         if (view.intent.hasExtra("dive_edit")) {
             edit = true
             dive = view.intent.extras?.getParcelable<DiveModel>("dive_edit")!!
+
             view.showDive(dive)
         } else {
             if (checkLocationPermissions(view)) {
@@ -54,6 +55,11 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         locationService.lastLocation.addOnSuccessListener {
             locationUpdate(Location(it.latitude, it.longitude))
         }
+    }
+
+    fun doConfigureMap(m: GoogleMap) {
+        map = m
+        locationUpdate(dive.location)
     }
 
     @SuppressLint("MissingPermission")
@@ -121,10 +127,7 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         view?.showLocation(dive.location)
     }
 
-    fun doConfigureMap(m: GoogleMap) {
-        map = m
-        locationUpdate(dive.location)
-    }
+
 
     fun doAddOrSave(
         title: String,

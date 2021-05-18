@@ -68,7 +68,17 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
         supportActionBar?.setDisplayHomeAsUpEnabled(upEnabled)
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
-            toolbar.title = user.displayName+ "'s" + title
+            val userReference = databaseReference?.child(user?.uid!!)
+            userReference?.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val userName = snapshot.child("name").value.toString()
+                    toolbar.title = "$userName's$title"
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
         }
         if(intent.hasExtra("favourite")){
             toolbar.title = "Favourite Dives"

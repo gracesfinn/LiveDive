@@ -325,7 +325,7 @@ class DiveView : BaseView(), AnkoLogger {
         if (dive != null) {
             binding.mapView.getMapAsync {
                 map = it
-                presenter.doConfigureMap(map)
+                presenter.doSetCurrentLocation()
                 it.setOnMapClickListener { presenter.doSetLocation() }
             }
             this.showLocation(dive.location)
@@ -337,8 +337,13 @@ class DiveView : BaseView(), AnkoLogger {
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_dive, menu)
-        if (presenter.edit) menu.getItem(0).setVisible(true)
+        if (presenter.edit) {
+            binding.toolbarAdd.title = "Edit Dive Log"
+            menuInflater.inflate(R.menu.menu_edit, menu)
+        }
+        else{
+            menuInflater.inflate(R.menu.menu_dive, menu)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
