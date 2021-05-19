@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:background="@drawable/custom_button"
-                    android:backgroundTint="@color/colorFaint"
+                    android:backgroundTint="@color/colorAccent"
                     android:paddingBottom="8dp"
                     android:paddingTop="8dp"
                     android:stateListAnimator="@null"

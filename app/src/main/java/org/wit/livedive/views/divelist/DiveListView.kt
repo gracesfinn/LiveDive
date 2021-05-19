@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import org.wit.livedive.BaseView
@@ -55,6 +56,9 @@ class DiveListView :  BaseView(), DiveListener {
         }
 
 
+
+
+
     }
 
     override fun showDives(dives: List<DiveModel>) {
@@ -67,6 +71,7 @@ class DiveListView :  BaseView(), DiveListener {
         return super.onCreateOptionsMenu(menu)
     }
 
+    
 
 
     override fun onDiveClick(dive: DiveModel) {

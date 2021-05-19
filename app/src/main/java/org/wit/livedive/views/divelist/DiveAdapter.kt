@@ -1,18 +1,22 @@
 package org.wit.livedive.activities
 
+import android.content.Intent
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import org.jetbrains.anko.toast
 
 import org.wit.livedive.R
+import org.wit.livedive.VIEW
 import org.wit.livedive.databinding.CardDiveBinding
 import org.wit.livedive.helpers.readImageFromPath
 import org.wit.livedive.models.DiveModel
+import org.wit.livedive.views.login.LoginView
 
 
 interface DiveListener{
@@ -52,8 +56,10 @@ class DiveAdapter constructor(
             val dateMessage = "Date Visited: ${dive.dayVisited}/${dive.monthVisited + 1}/${dive.yearVisited} "
             viewBinding.dateCard.text = dateMessage
 
+//val intNumDives: Int = snapshot.child("numberOfDives").value.toString().toInt()
 
-            val timeMessage = "Dive Time: ${dive.mins} mins"
+            val diveTime: Int = dive.mins.toString().toInt()
+            val timeMessage = "Dive Time: ${diveTime} mins"
             viewBinding.timeCard.text = timeMessage
 
             val depthMessage = "Max Depth: ${dive.maxDepth} ft"
@@ -100,6 +106,8 @@ class DiveAdapter constructor(
             Glide.with(itemView.context).load(favImage).into(viewBinding.favCard);
 
 
+
+
             viewBinding.expandBtn.setOnClickListener {
                 if (viewBinding.expandableLayout.visibility == View.GONE) {
                     TransitionManager.beginDelayedTransition(viewBinding.cardView, AutoTransition())
@@ -113,6 +121,19 @@ class DiveAdapter constructor(
 
             }
 
+           /* viewBinding.favBtn.setOnClickListener {
+                if (!dive.favourite) {
+                    dive.favourite = true
+
+                } 
+
+
+            } */
+
+            viewBinding.favIcon.setOnCheckedChangeListener{ checkbox, isChecked ->
+                dive.favourite = true
+            }
+
 
 
 
@@ -121,6 +142,8 @@ class DiveAdapter constructor(
             Glide.with(itemView.context).load(dive.poiImage).into(viewBinding.poiImageCard);
             itemView.setOnClickListener{ listener.onDiveClick(dive)}
         }
+
+
 
     }
 

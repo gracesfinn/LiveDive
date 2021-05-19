@@ -17,9 +17,9 @@ data class DiveModel(
     var dayVisited: Int= 0,
     var monthVisited: Int= 0,
     var yearVisited: Int= 0,
-    var maxDepth: String? = "",
-    var mins: String? = "",
-    var weight: String? = "",
+    var maxDepth: Int = 0,
+    var mins: Int = 0,
+    var weight: Int = 0,
     var weather: String?= "",
     var ocean: String ?= "",
     var wildlifeImage: String ?= "",
@@ -45,9 +45,9 @@ data class DiveModel(
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -70,9 +70,9 @@ data class DiveModel(
         parcel.writeInt(dayVisited)
         parcel.writeInt(monthVisited)
         parcel.writeInt(yearVisited)
-        parcel.writeString(maxDepth)
-        parcel.writeString(mins)
-        parcel.writeString(weight)
+        parcel.writeInt(maxDepth)
+        parcel.writeInt(mins)
+        parcel.writeInt(weight)
         parcel.writeString(weather)
         parcel.writeString(ocean)
         parcel.writeString(wildlifeImage)

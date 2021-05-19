@@ -42,11 +42,6 @@ class DiveView : BaseView(), AnkoLogger {
 
         //Delete Confirmation Window
 
-
-
-
-
-
         binding = ActivityDiveBinding.inflate(layoutInflater)
         val view = binding.root
         super.init(binding.toolbarAdd, true)
@@ -100,9 +95,9 @@ class DiveView : BaseView(), AnkoLogger {
                     binding.dateVisited.dayOfMonth,
                     binding.dateVisited.month,
                     binding.dateVisited.year,
-                    binding.maxDepth.text.toString(),
-                    binding.diveTime.text.toString(),
-                    binding.weight.text.toString(),
+                    binding.maxDepth.text.toString().toInt(),
+                    binding.diveTime.text.toString().toInt(),
+                    binding.weight.text.toString().toInt(),
                     binding.weather.text.toString(),
                     binding.ocean.text.toString(),
                     binding.wildlife.text.toString(),
@@ -119,9 +114,9 @@ class DiveView : BaseView(), AnkoLogger {
                 binding.dateVisited.dayOfMonth,
                 binding.dateVisited.month,
                 binding.dateVisited.year,
-                binding.maxDepth.text.toString(),
-                binding.diveTime.text.toString(),
-                binding.weight.text.toString(),
+                binding.maxDepth.text.toString().toInt(),
+                binding.diveTime.text.toString().toInt(),
+                binding.weight.text.toString().toInt(),
                 binding.weather.text.toString(),
                 binding.ocean.text.toString(),
                 binding.wildlife.text.toString(),
@@ -139,9 +134,9 @@ class DiveView : BaseView(), AnkoLogger {
                 binding.dateVisited.dayOfMonth,
                 binding.dateVisited.month,
                 binding.dateVisited.year,
-                binding.maxDepth.text.toString(),
-                binding.diveTime.text.toString(),
-                binding.weight.text.toString(),
+                binding.maxDepth.text.toString().toInt(),
+                binding.diveTime.text.toString().toInt(),
+                binding.weight.text.toString().toInt(),
                 binding.weather.text.toString(),
                 binding.ocean.text.toString(),
                 binding.wildlife.text.toString(),
@@ -359,9 +354,10 @@ class DiveView : BaseView(), AnkoLogger {
                             binding.dateVisited.dayOfMonth,
                             binding.dateVisited.month,
                             binding.dateVisited.year,
-                            binding.maxDepth.text.toString(),
-                            binding.diveTime.text.toString(),
-                            binding.weight.text.toString(),
+
+                            binding.maxDepth.text.toString().toInt(),
+                            binding.diveTime.text.toString().toInt(),
+                            binding.weight.text.toString().toInt(),
                             binding.weather.text.toString(),
                             binding.ocean.text.toString(),
                             binding.wildlife.text.toString(),

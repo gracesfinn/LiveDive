@@ -28,6 +28,10 @@ class DiveListPresenter (view: BaseView) : BasePresenter(view) {
         view?.navigateTo(VIEW.MAPS)
     }
 
+    fun doSetFavourite(){
+
+    }
+
     fun doShowFavourites() {
         view?.navigateTo(VIEW.FAVOURITE)
     }
