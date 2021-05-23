@@ -39,7 +39,8 @@ class DiveMapView : BaseView(), GoogleMap.OnMarkerClickListener  {
             binding.currentTitle.text = dive.title
         }
         if (dive != null) {
-            binding.currentDescription.text = dive.description
+            val dateMessage = "Date Visited: ${dive.dayVisited}/${dive.monthVisited + 1}/${dive.yearVisited} "
+            binding.currentDate.text = dateMessage
         }
         if (dive != null) {
             Glide.with(this).load(dive.image).into(binding.currentImage);

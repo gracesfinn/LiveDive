@@ -51,7 +51,7 @@
 
     <string name="dive_image_placeholder">Dive Image</string>
     <string name="dive_title_placeholder">Dive Title</string>
-    <string name="dive_description_placeholder">Dive Description</string>
+    <string name="dive_date_placeholder">Date of Dive</string>
 
     <string name="select_dive_image">Select Dive Image</string>
     <string name="change_dive_image">Change Dive Image</string>

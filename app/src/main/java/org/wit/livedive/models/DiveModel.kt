@@ -17,16 +17,15 @@ data class DiveModel(
     var dayVisited: Int= 0,
     var monthVisited: Int= 0,
     var yearVisited: Int= 0,
-    var maxDepth: Int = 0,
-    var mins: Int = 0,
-    var weight: Int = 0,
+    var maxDepth: String? = "",
+    var mins: String? = "",
+    var weight: String? = "",
     var weather: String?= "",
     var ocean: String ?= "",
     var wildlifeImage: String ?= "",
     var wildlife: String ?= "",
     var poiImage : String ?= "",
     var poi : String ?= "",
-    var additionalNotes : String ?= "",
     var rating: Float = 0f,
     var favourite: Boolean = false,
     var wetsuit: Boolean = false,
@@ -45,10 +44,9 @@ data class DiveModel(
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
-        parcel.readInt(),
-        parcel.readInt(),
-        parcel.readInt(),
-        parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -70,16 +68,15 @@ data class DiveModel(
         parcel.writeInt(dayVisited)
         parcel.writeInt(monthVisited)
         parcel.writeInt(yearVisited)
-        parcel.writeInt(maxDepth)
-        parcel.writeInt(mins)
-        parcel.writeInt(weight)
+        parcel.writeString(maxDepth)
+        parcel.writeString(mins)
+        parcel.writeString(weight)
         parcel.writeString(weather)
         parcel.writeString(ocean)
         parcel.writeString(wildlifeImage)
         parcel.writeString(wildlife)
         parcel.writeString(poiImage)
         parcel.writeString(poi)
-        parcel.writeString(additionalNotes)
         parcel.writeFloat(rating)
     }
 

@@ -61,6 +61,7 @@ class DiveListPresenter (view: BaseView) : BasePresenter(view) {
         }
     }
 
+
     fun doShowList() {
         view!!.intent.removeExtra("favourite")
         view?.navigateTo(VIEW.LIST)

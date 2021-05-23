@@ -71,11 +71,11 @@ class DiveView : BaseView(), AnkoLogger {
                 presenter.doCheckNitrox(true)
         }
 
-        binding.favCheckBox.setOnCheckedChangeListener { _, isChecked ->
+        /*binding.favCheckBox.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked)
                 toast("Added to Favourites")
                 presenter.doCheckFavourite(true)
-        }
+        } */
 
         binding.ratingBar.setOnRatingBarChangeListener(object :
             RatingBar.OnRatingBarChangeListener {
@@ -95,14 +95,13 @@ class DiveView : BaseView(), AnkoLogger {
                     binding.dateVisited.dayOfMonth,
                     binding.dateVisited.month,
                     binding.dateVisited.year,
-                    binding.maxDepth.text.toString().toInt(),
-                    binding.diveTime.text.toString().toInt(),
-                    binding.weight.text.toString().toInt(),
+                    binding.maxDepth.text.toString(),
+                    binding.diveTime.text.toString(),
+                    binding.weight.text.toString(),
                     binding.weather.text.toString(),
                     binding.ocean.text.toString(),
                     binding.wildlife.text.toString(),
-                    binding.pointOfInterest.text.toString(),
-                    binding.additionalNotes.text.toString()
+                    binding.pointOfInterest.text.toString()
             )
             presenter.doSelectImage()
         } //Image Selector
@@ -114,14 +113,13 @@ class DiveView : BaseView(), AnkoLogger {
                 binding.dateVisited.dayOfMonth,
                 binding.dateVisited.month,
                 binding.dateVisited.year,
-                binding.maxDepth.text.toString().toInt(),
-                binding.diveTime.text.toString().toInt(),
-                binding.weight.text.toString().toInt(),
+                binding.maxDepth.text.toString(),
+                binding.diveTime.text.toString(),
+                binding.weight.text.toString(),
                 binding.weather.text.toString(),
                 binding.ocean.text.toString(),
                 binding.wildlife.text.toString(),
-                binding.pointOfInterest.text.toString(),
-                binding.additionalNotes.text.toString()
+                binding.pointOfInterest.text.toString()
 
             )
             presenter.doSelectImageWildlife()
@@ -134,14 +132,13 @@ class DiveView : BaseView(), AnkoLogger {
                 binding.dateVisited.dayOfMonth,
                 binding.dateVisited.month,
                 binding.dateVisited.year,
-                binding.maxDepth.text.toString().toInt(),
-                binding.diveTime.text.toString().toInt(),
-                binding.weight.text.toString().toInt(),
+                binding.maxDepth.text.toString(),
+                binding.diveTime.text.toString(),
+                binding.weight.text.toString(),
                 binding.weather.text.toString(),
                 binding.ocean.text.toString(),
                 binding.wildlife.text.toString(),
-                binding.pointOfInterest.text.toString(),
-                binding.additionalNotes.text.toString()
+                binding.pointOfInterest.text.toString()
 
             )
             presenter.doSelectImagePOI()
@@ -262,10 +259,10 @@ class DiveView : BaseView(), AnkoLogger {
               binding.diveTime.setText(dive.mins)
           }
 
-          if(!binding.favCheckBox.isChecked) if ( dive != null)
+         /* if(!binding.favCheckBox.isChecked) if ( dive != null)
           {
               binding.favCheckBox.isChecked()
-          }
+          } */
 
           if (binding.weight.text.isEmpty()) if (dive != null) {
               binding.weight.setText(dive.weight)
@@ -354,15 +351,14 @@ class DiveView : BaseView(), AnkoLogger {
                             binding.dateVisited.dayOfMonth,
                             binding.dateVisited.month,
                             binding.dateVisited.year,
-
-                            binding.maxDepth.text.toString().toInt(),
-                            binding.diveTime.text.toString().toInt(),
-                            binding.weight.text.toString().toInt(),
+                            binding.maxDepth.text.toString(),
+                            binding.diveTime.text.toString(),
+                            binding.weight.text.toString(),
                             binding.weather.text.toString(),
                             binding.ocean.text.toString(),
                             binding.wildlife.text.toString(),
                             binding.pointOfInterest.text.toString(),
-                            binding.additionalNotes.text.toString()
+
                     )
                 }
             }

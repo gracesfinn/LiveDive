@@ -92,14 +92,14 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
                    dayOfMonth: Int,
                    month: Int,
                    year: Int,
-                   maxDepth: Int,
-                   mins: Int,
-                   weight: Int,
+                   maxDepth: String,
+                   mins: String,
+                   weight: String,
                    weather: String,
                    ocean: String,
                    wildlife: String,
                    POI : String,
-                   additionalNotes : String) {
+                  ) {
         dive.title = title;
         dive.description = description
         dive.dayVisited = dayOfMonth
@@ -112,7 +112,7 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         dive.ocean = ocean
         dive.wildlife = wildlife
         dive.poi = POI
-        dive.additionalNotes = additionalNotes
+
     }
 
 
@@ -135,14 +135,13 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         dayOfMonth: Int,
         month: Int,
         year: Int,
-        maxDepth: Int,
-        mins: Int,
-        weight: Int,
+        maxDepth: String,
+        mins:String,
+        weight: String,
         weather: String,
         ocean: String,
         wildlife: String,
-        POI : String,
-        additionalNotes : String
+        POI : String
     ) {
         dive.title = title
         dive.description = description
@@ -156,7 +155,6 @@ class DivePresenter(view: BaseView) : BasePresenter(view) {
         dive.ocean = ocean
         dive.wildlife = wildlife
         dive.poi = POI
-        dive.additionalNotes = additionalNotes
         doAsync {
             if (edit) {
                 app.dives.update(dive)

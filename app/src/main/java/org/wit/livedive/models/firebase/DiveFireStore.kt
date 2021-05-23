@@ -73,7 +73,6 @@ class DiveFireStore(val context: Context) : DiveStore, AnkoLogger {
             foundDive.wildlife = dive.wildlife
             foundDive.poi = dive.poi
             foundDive.poiImage = dive.poiImage
-            foundDive.additionalNotes = dive.additionalNotes
         }
 
         dive.fbId?.let { db.child("users").child(userId).child("dives").child(it).setValue(dive) }
